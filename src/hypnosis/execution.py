@@ -34,9 +34,15 @@ async def from_sync(factory):
     finally:
         try:
             if pending is not None:
-                result = await asyncio.shield(pending)
-                if iterator is None:
-                    iterator = result
+                try:
+                    result = await asyncio.shield(pending)
+                except Exception:
+                    # The original factory/next exception is already leaving
+                    # the try body. Still close an acquired iterator below.
+                    pass
+                else:
+                    if iterator is None:
+                        iterator = result
             close = getattr(iterator, 'close', None)
             if close is not None:
                 await asyncio.shield(loop.run_in_executor(executor, close))

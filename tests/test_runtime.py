@@ -129,6 +129,21 @@ class RuntimeTests(unittest.IsolatedAsyncioTestCase):
             await task
         self.assertEqual(closed, [True])
 
+    async def test_failing_sync_iterator_is_closed_on_its_worker(self):
+        calls = []
+        class Source:
+            def __iter__(self): return self
+            def __next__(self):
+                calls.append(('next', threading.get_ident()))
+                raise RuntimeError('source failure')
+            def close(self):
+                calls.append(('close', threading.get_ident()))
+        with self.assertRaisesRegex(RuntimeError, 'source failure'):
+            async for _value in from_sync(Source):
+                self.fail('A failed source cannot yield a value')
+        self.assertEqual([name for name, _thread in calls], ['next', 'close'])
+        self.assertEqual(calls[0][1], calls[1][1])
+
     def test_invalid_limits(self):
         for kwargs in ({'max_events': True}, {'max_output_bytes': -1}, {'max_seconds': float('nan')}):
             with self.assertRaises(ValueError):
