@@ -20,7 +20,7 @@ requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
 
 [project.optional-dependencies]
-models = ["thoughtform[thoughtformula] @ git+https://github.com/wispsy/thoughtform.git@1217f8bf77eca5ac20c27d99cd694d58ec9039e7"]
+models = ["thoughtform[thoughtformula] @ git+https://github.com/wispsy/thoughtform.git@e618ab5e41aee2f04f004e9df3c6a594112d2c8e"]
 
 [project.urls]
 Source = "https://github.com/wispsy/hypnosis"
