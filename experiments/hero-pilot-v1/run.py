@@ -23,9 +23,20 @@ def run(corpus,destination,*,budget=900):
         remaining=deadline-time.monotonic()
         if remaining<=1: raise TimeoutError('Combined pilot deadline reached')
         with (destination/(name+'.stdout.json')).open('w') as output, (destination/(name+'.progress.jsonl')).open('w') as errors:
-            completed=subprocess.run([sys.executable,*arguments],stdout=output,stderr=errors,timeout=remaining)
+            completed=subprocess.run([sys.executable,'-u',*arguments],stdout=output,stderr=errors,timeout=remaining)
         if completed.returncode not in (0,1): raise RuntimeError(name+' failed; inspect its local progress log')
-        result=json.loads((destination/(name+'.stdout.json')).read_text())
+        path=destination/(name+'.stdout.json')
+        if path.stat().st_size>1024*1024: raise ValueError('Child result exceeds the byte ceiling')
+        try: result=json.loads(path.read_text())
+        except json.JSONDecodeError:
+            if name=='probe': raise
+            from hypnosis.pilot_results import collect_completed_job
+            result=collect_completed_job(destination/name,corpus,destination/(name+'.config.json'),
+                parent_artifact=destination/'hero/artifact.json' if name=='hero-coding' else None,
+                timeout=max(0.1,deadline-time.monotonic()))
+            (destination/(name+'.recollected.json')).write_text(json.dumps(result,sort_keys=True)+'\n')
+            print(json.dumps({'recollected':name,'original_returncode':completed.returncode,
+                              'original_stdout_bytes':path.stat().st_size}),flush=True)
         if result.get('status') not in ('completed','limited') and name!='probe': raise RuntimeError(name+' did not complete')
         return result
     probe_code='''import json,sys
