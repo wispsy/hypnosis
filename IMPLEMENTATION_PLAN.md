@@ -112,3 +112,7 @@ coverage/exclusions and exact selected record/token denominators. The native
 Thoughtformula loss adapter and nonexecuting syntax probes support fixed-budget
 experiments. Missing held-out splits are explicit unavailable results. Matched
 curriculum/shuffle comparison and small-sample limits belong in pilot receipts.
+HYP-CURRICULUM-01: the approved internal v1 generator is deterministic, finite,
+content-hashed and split by problem group. Tests independently verify every
+reference and demonstrate train/held-out separation and source-selection bounds.
+It contains no external teacher output or vault-derived material.

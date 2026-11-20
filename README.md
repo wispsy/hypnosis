@@ -84,3 +84,9 @@ missing splits without substituting training examples. The Thoughtformula
 adapter reports token-weighted next-token loss/perplexity. Bounded syntax probes
 parse generated continuations without executing them. These measures do not
 establish factual accuracy, working code or autonomous agent capability.
+`hypnosis.curriculum.generated_documents` implements the explicitly approved
+`wispsy-internal-curriculum/v1` pilot: exact addition/multiplication answers and
+Python addition, even-number filtering and list-sum references. Seeds and recipe
+hashes identify the generated material. Related arithmetic and Python variants
+share a split group. Reference code is authored and independently checked;
+model-generated code is never executed. New recipes and sources require review.
