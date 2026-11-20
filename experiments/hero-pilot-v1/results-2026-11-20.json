@@ -1,0 +1,353 @@
+{
+  "architecture": {
+    "expert_hidden": 96,
+    "experts": 2,
+    "heads": 4,
+    "kv_heads": 2,
+    "layers": 2,
+    "lora_rank": 4,
+    "parameters": 86900,
+    "vocabulary_size": 140,
+    "width": 48
+  },
+  "budget_seconds": 900,
+  "collection_finished_utc": "2026-11-20T19:51:43.070628+00:00",
+  "comparison": {
+    "matched_steps_data_tokenizer": false,
+    "reason": "launcher stdout collection failed after Hero completed; Hero Coding used the remaining original deadline; no shuffle run was started",
+    "status": "not-performed"
+  },
+  "corpus": {
+    "bytes": 1688998,
+    "documents": 925,
+    "sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+    "splits": {
+      "test": 153,
+      "train": 490,
+      "validation": 282
+    }
+  },
+  "elapsed_wall_seconds_at_collection": 838.266343,
+  "limitations": [
+    "single seed and small model",
+    "source preparation exceeds actual sampled training windows",
+    "no completed matched shuffle baseline",
+    "held-out next-token loss is not factual accuracy",
+    "syntax probes do not establish working code",
+    "no autonomous model-training agent qualification",
+    "no corpus text or weights published"
+  ],
+  "native_training_seconds": 366.81473345900304,
+  "next_decision": "https://github.com/wispsy/hypnosis/issues/27",
+  "recovery": {
+    "completed_stages_replayed": false,
+    "issue": "https://github.com/wispsy/hypnosis/issues/26",
+    "original_hero_stdout_bytes": 0,
+    "recollected_hero_stdout_bytes": 13868
+  },
+  "runs": {
+    "hero": {
+      "before": {
+        "test": {
+          "coverage": 0.9803921568627451,
+          "documents_available": 153,
+          "documents_representable": 150,
+          "documents_selected": 16,
+          "documents_unknown": 3,
+          "loss": 5.2190806858132435,
+          "perplexity": 184.76424957521544,
+          "selected_sources": {
+            "internal-v1": 8,
+            "simplewiki": 3,
+            "ud-test": 3,
+            "wiktionary": 2
+          },
+          "sequence_limit": 16,
+          "sequences": 16,
+          "status": "measured",
+          "tokens": 448
+        },
+        "validation": {
+          "coverage": 0.9893617021276596,
+          "documents_available": 282,
+          "documents_representable": 279,
+          "documents_selected": 16,
+          "documents_unknown": 3,
+          "loss": 5.138479444120034,
+          "perplexity": 170.4563827111333,
+          "selected_sources": {
+            "internal-v1": 9,
+            "simplewiki": 2,
+            "tinystories-valid": 2,
+            "ud-dev": 2,
+            "wiktionary": 1
+          },
+          "sequence_limit": 16,
+          "sequences": 16,
+          "status": "measured",
+          "tokens": 451
+        }
+      },
+      "config_sha256": "e008d93c9fb073be224c7a6f0d2fca0d7572d2c90bf309002dcc53a3438dfbe3",
+      "corpus_sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+      "evaluation": {
+        "claim": "small experimental next-token/syntax measurements only",
+        "heldout": {
+          "test": {
+            "coverage": 0.9803921568627451,
+            "documents_available": 153,
+            "documents_representable": 150,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 4.372842560748563,
+            "perplexity": 79.26863766951982,
+            "selected_sources": {
+              "internal-v1": 8,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 448
+          },
+          "validation": {
+            "coverage": 0.9893617021276596,
+            "documents_available": 282,
+            "documents_representable": 279,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 4.170537078287551,
+            "perplexity": 64.75021870695615,
+            "selected_sources": {
+              "internal-v1": 9,
+              "simplewiki": 2,
+              "tinystories-valid": 2,
+              "ud-dev": 2,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 451
+          }
+        },
+        "syntax": {
+          "attempted": 1,
+          "claim": "syntax-only; no execution, functional correctness or agent-capability claim",
+          "failed": 0,
+          "nonempty": 1,
+          "parsed": 0
+        }
+      },
+      "job": {
+        "block_size": 32,
+        "checkpoint_interval": 100,
+        "evaluation_sequences": 16,
+        "learning_rate": 0.003,
+        "max_seconds": 297.0,
+        "max_sequences": 2048,
+        "max_steps": 1478,
+        "model_id": "hero",
+        "run_id": "hero-pilot-v1",
+        "seed": 7,
+        "shuffle": false
+      },
+      "last_result_written_utc": "2026-11-20T19:42:31.425440+00:00",
+      "model_id": "hero",
+      "parent_sha256": null,
+      "recipe_sha256": "11523f5bf0b1f08fa6e14ca178ca5c3936ee2728682cd419572160b58fe92877",
+      "run_id": "hero-pilot-v1",
+      "schema": "hypnosis-training-result/1",
+      "status": "completed",
+      "training": {
+        "checkpoint_sha256": "f3bcda82c252fbafebf5adda50474204aa404f80c6ce207552c41562e12bfe4c",
+        "elapsed_seconds": 277.38778295900556,
+        "inference_sha256": "9b147de9008c522703108717bc5df1e41b3de97c62c43fcb9ee6e86efad73915",
+        "parameters": 86900,
+        "selection": {
+          "documents_available": 490,
+          "documents_outside_window_pool": 252,
+          "documents_unknown": 43,
+          "pairs_sha256": "64dc59fd7d24ef796bdbdf56cc8d8b9f4f8dbf0d2355a7bbc507951e389c92c1",
+          "sequences": 2048,
+          "tokenizer_sha256": "64ca830ea9da36788cce54b5dbb3051076c6b5b4ef011e78f27574a5d1e9831c",
+          "window_pool_document_sources": {
+            "internal-v1": 108,
+            "tinystories-train": 87
+          },
+          "window_pool_documents": 195
+        },
+        "status": "completed",
+        "step": 1478,
+        "tokens": 44662
+      },
+      "wall_seconds_this_invocation": 284.3101697079983
+    },
+    "hero-coding": {
+      "before": {
+        "test": {
+          "coverage": 0.9803921568627451,
+          "documents_available": 153,
+          "documents_representable": 150,
+          "documents_selected": 16,
+          "documents_unknown": 3,
+          "loss": 4.372842560748563,
+          "perplexity": 79.26863766951982,
+          "selected_sources": {
+            "internal-v1": 8,
+            "simplewiki": 3,
+            "ud-test": 3,
+            "wiktionary": 2
+          },
+          "sequence_limit": 16,
+          "sequences": 16,
+          "status": "measured",
+          "tokens": 448
+        },
+        "validation": {
+          "coverage": 0.9893617021276596,
+          "documents_available": 282,
+          "documents_representable": 279,
+          "documents_selected": 16,
+          "documents_unknown": 3,
+          "loss": 4.170537078287551,
+          "perplexity": 64.75021870695615,
+          "selected_sources": {
+            "internal-v1": 9,
+            "simplewiki": 2,
+            "tinystories-valid": 2,
+            "ud-dev": 2,
+            "wiktionary": 1
+          },
+          "sequence_limit": 16,
+          "sequences": 16,
+          "status": "measured",
+          "tokens": 451
+        }
+      },
+      "config_sha256": "3bee6a8a286b1dd5998bf195028891aa82dfad61cf3f79a6fc019fa34e9b0f3c",
+      "corpus_sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+      "evaluation": {
+        "claim": "small experimental next-token/syntax measurements only",
+        "heldout": {
+          "test": {
+            "coverage": 0.9803921568627451,
+            "documents_available": 153,
+            "documents_representable": 150,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 5.044133721095119,
+            "perplexity": 155.10987257074402,
+            "selected_sources": {
+              "internal-v1": 8,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 448
+          },
+          "validation": {
+            "coverage": 0.9893617021276596,
+            "documents_available": 282,
+            "documents_representable": 279,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 3.8959021628985395,
+            "perplexity": 49.200420140287505,
+            "selected_sources": {
+              "internal-v1": 9,
+              "simplewiki": 2,
+              "tinystories-valid": 2,
+              "ud-dev": 2,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 451
+          }
+        },
+        "syntax": {
+          "attempted": 1,
+          "claim": "syntax-only; no execution, functional correctness or agent-capability claim",
+          "failed": 0,
+          "nonempty": 1,
+          "parsed": 0
+        }
+      },
+      "job": {
+        "block_size": 32,
+        "checkpoint_interval": 50,
+        "evaluation_sequences": 16,
+        "learning_rate": 0.003,
+        "max_seconds": 150,
+        "max_sequences": 2048,
+        "max_steps": 500,
+        "model_id": "hero-coding",
+        "run_id": "hero-coding-pilot-v1",
+        "seed": 7,
+        "shuffle": false
+      },
+      "last_result_written_utc": "2026-11-20T19:50:57.590056+00:00",
+      "model_id": "hero-coding",
+      "parent_sha256": "f3bcda82c252fbafebf5adda50474204aa404f80c6ce207552c41562e12bfe4c",
+      "recipe_sha256": "bee7bef5557b003653294eea6fb9663efcb9558469e46b64103ba2e7d14bd411",
+      "run_id": "hero-coding-pilot-v1",
+      "schema": "hypnosis-training-result/1",
+      "status": "completed",
+      "training": {
+        "checkpoint_sha256": "df556222d534f89a65e3e50a8848643462322b425eaae362c2474a1260ef9fe6",
+        "elapsed_seconds": 89.42695049999747,
+        "inference_sha256": "ae03bcaafbee3a959ebb66ea51ad4a057bfae20a47913e359d9c835115d7a2ff",
+        "parameters": 86900,
+        "selection": {
+          "documents_available": 65,
+          "documents_outside_window_pool": 0,
+          "documents_unknown": 0,
+          "pairs_sha256": "62a13c7b8f44bc81ac4989a723f6ab41fe3d61047723d8ef6353d8e5139a4009",
+          "sequences": 292,
+          "tokenizer_sha256": "64ca830ea9da36788cce54b5dbb3051076c6b5b4ef011e78f27574a5d1e9831c",
+          "window_pool_document_sources": {
+            "internal-v1": 65
+          },
+          "window_pool_documents": 65
+        },
+        "status": "completed",
+        "step": 500,
+        "tokens": 14320
+      },
+      "wall_seconds_this_invocation": 94.01625562499976
+    }
+  },
+  "scheduled_stop_pst": "2026-11-20 11:52:44 AM PST",
+  "schema": "hero-pilot-evidence/1",
+  "selected_sources": [
+    "internal-v1",
+    "tinystories-train",
+    "tinystories-valid",
+    "simplewiki",
+    "wiktionary",
+    "ud-train",
+    "ud-dev",
+    "ud-test"
+  ],
+  "software": {
+    "python": "3.14.7",
+    "runtime": "Thoughtformula pure-Python CPU training",
+    "sources": {
+      "backpack-store": "77440f85a290a756e26c7180ccb2d092812f13b4",
+      "engl": "0d1de7f36a2cb4bc0b2eef28195c7046beda46ab",
+      "func-seq": "bfb4c1d5bccc73f842d72ddb7809a11973acb9e4",
+      "hypnosis": "4661eb97509cfe1de3fab4a53df13dcae2fecfd8",
+      "thoughtform": "831eba64bb8bf9b88dea8b75c2c17ef8ca5174ff",
+      "thoughtformula": "5ce72f850772c2467f0a0909dfd5c81874065684"
+    }
+  },
+  "source_review": "https://github.com/wispsy/hypnosis/issues/13",
+  "started_utc": "2026-11-20T19:37:44.804285+00:00"
+}
