@@ -77,3 +77,10 @@ evaluate and register callables with func_seq. `WorkflowIdentity` binds corpus,
 source selection, recipe and job configuration into its version. Its existing
 checkpoint preserves completed stages and requires explicit retry/restart after
 an uncertain interrupted effect. Native numerical checkpoints remain separate.
+
+`evaluation.measure_split` retains explicit held-out split denominators and
+reports unknown-token exclusions, selected records, sequence/token counts and
+missing splits without substituting training examples. The Thoughtformula
+adapter reports token-weighted next-token loss/perplexity. Bounded syntax probes
+parse generated continuations without executing them. These measures do not
+establish factual accuracy, working code or autonomous agent capability.

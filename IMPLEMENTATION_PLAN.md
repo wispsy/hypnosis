@@ -106,3 +106,9 @@ HYP-WORKFLOW-01: func_seq owns stage sequencing and progress. Identity-bound
 trusted stage definitions refuse incompatible recovery; tests demonstrate
 committed stages are not replayed and failed effects require explicit retry.
 The first profile does not depend on an external tool catalog or Ollama.
+
+HYP-EVAL-01: provider-neutral split measurement reports availability, tokenizer
+coverage/exclusions and exact selected record/token denominators. The native
+Thoughtformula loss adapter and nonexecuting syntax probes support fixed-budget
+experiments. Missing held-out splits are explicit unavailable results. Matched
+curriculum/shuffle comparison and small-sample limits belong in pilot receipts.
