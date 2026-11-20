@@ -131,8 +131,13 @@ HERO-PILOT-02: completed-job receipt recollection validates the native artifact 
 func_seq state before reopening the identical CLI without retry authority. It
 retains original delivery diagnostics and respects the combined deadline. The
 matched shuffle acceptance in HERO-PILOT-01 remains open; no curriculum advantage
-or model promotion is claimed. Local training evidence stays in ignored run
-folders. The next source/window-mixture/runtime decision is tracked in #27.
+or model promotion is claimed. Complete local training artifacts stay in ignored
+run folders. The next source/window-mixture/runtime decision is tracked in #27.
+
+The owner-approved sanitized pilot measurements are published in
+`experiments/hero-pilot-v1/results-2026-11-20.json`, with the observed limits and
+unperformed comparison documented beside them. Raw source text and weights are
+not distributed.
 
 HYP-DATA-02: citation provenance preserves reference groups and explicit bodies,
 marks conflicting named reuse unresolved, and propagates truncation metadata.

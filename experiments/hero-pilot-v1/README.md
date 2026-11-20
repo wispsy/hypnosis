@@ -33,5 +33,39 @@ requires func_seq's completed state, and reopens the identical command without
 retry authority. The original delivery diagnostics remain available. Recollection
 shares the original combined deadline and never grants permission to repeat an
 uncertain optimizer stage. This handles delivery failure without asserting an
-unreproduced root cause. Local measurements require a separately selected public
-report operation before they are copied into this repository.
+unreproduced root cause. Raw sources and checkpoints remain local; the owner
+approved publication of the sanitized measurement report below.
+
+## First bounded execution — 20 November 2026
+
+The [sanitized receipt](results-2026-11-20.json) records two learned checkpoints
+within the original 11:52:44 AM PST deadline. Corpus preparation retained 925
+records (490 train, 282 validation, 153 test). The bounded training-window pool
+reached internal exercises and TinyStories; it did not consume every prepared
+Wikipedia/UD/Wiktionary record. Coverage and exclusions are explicit in the receipt.
+
+| Model | Steps | Trained tokens | Native training time | Validation loss before → after | Mixed test loss before → after |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Hero | 1,478 | 44,662 | 277.4 s | 5.1385 → 4.1705 | 5.2191 → 4.3728 |
+| Hero Coding | 500 | 14,320 | 89.4 s | 4.1705 → 3.8959 | 4.3728 → 5.0441 |
+
+Both models use 86,900 parameters and a 140-entry tokenizer. Evaluation selects
+16 fixed source/family windows per split: 451 validation and 448 test tokens.
+Neither model passed its one syntax probe. Hero Coding regressed on the mixed
+test. These single-seed samples do not qualify a general assistant, functional
+coding model or autonomous operation of training tools. No model is promoted.
+
+Hero's stdout collection failed after its complete result was persisted. Reopening
+the identical completed job recovered the result without replaying stages. Hero
+Coding used the remaining original wall-clock time. **No shuffled baseline ran**,
+so no curriculum advantage is claimed. Safe recollection is implemented in
+[#26](https://github.com/wispsy/hypnosis/issues/26); the underlying delivery fault
+was not deterministically reproduced. The matched comparison remains open in
+[#16](https://github.com/wispsy/hypnosis/issues/16) and requires a new runtime
+selection. [#27](https://github.com/wispsy/hypnosis/issues/27) collects the next
+authored-source, source-mixture and runtime decisions.
+
+Native `.tft` and quantized `.mgpt` artifacts reload with matching tokenizers and
+step counts. Inference exports embed neither raw corpus segments nor RAG source
+documents. The report contains measurements and hashes; it distributes no source
+text, generated continuations, tokenizer vocabulary, credentials or weights.
