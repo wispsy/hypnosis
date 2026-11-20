@@ -27,6 +27,14 @@ class EvaluationTests(unittest.TestCase):
                 encode_sequences=lambda _text:[((1,),(2,))],
                 score=lambda _pairs:{'loss':1.0,'tokens':99,'sequences':1})
 
+    def test_fixed_windows_balance_source_strata_within_the_budget(self):
+        records=[{'id':str(index),'text':'text','split':'test','source_id':source}
+                 for index,source in enumerate(['a']*10+['b']*10)]
+        result=measure_split(records,'test',max_sequences=2,
+            encode_sequences=lambda _text:[((1,),(2,))],
+            score=lambda pairs:{'loss':1.0,'perplexity':2.718,'tokens':len(pairs),'sequences':len(pairs)})
+        self.assertEqual(result['selected_sources'],{'a':1,'b':1})
+
     def test_syntax_probe_counts_nonempty_and_never_executes_output(self):
         class Adapter:
             definition=SimpleNamespace(generation=SimpleNamespace(max_new_tokens=8))
