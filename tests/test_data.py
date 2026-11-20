@@ -1,4 +1,5 @@
 import bz2
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -72,3 +73,16 @@ class DataTests(unittest.TestCase):
             path.write_text('Authored story.\n<|endoftext|>\n')
             with self.assertRaises(ValueError): prepare_corpus([Source('tinystories-train',str(path))],root/'out',limits=DataLimits(max_output_bytes=10))
             self.assertFalse((root/'out').exists())
+
+    def test_loading_does_not_admit_new_source_ids_through_a_receipt(self):
+        with TemporaryDirectory() as directory:
+            root=Path(directory);path=root/'TinyStories-train.txt'
+            path.write_text('Authored story.\n<|endoftext|>\n')
+            prepare_corpus([Source('tinystories-train',str(path))],root/'out')
+            manifest=root/'out/manifest.json';data=root/'out/documents.jsonl'
+            value=json.loads(data.read_text());value['source_id']='python3-vault'
+            raw=(json.dumps(value)+'\n').encode();data.write_bytes(raw)
+            receipt=json.loads(manifest.read_text());receipt['sha256']=hashlib.sha256(raw).hexdigest();receipt['bytes']=len(raw)
+            receipt['sources']['python3-vault']=receipt['sources'].pop('tinystories-train')
+            manifest.write_text(json.dumps(receipt))
+            with self.assertRaises(ValueError): load_corpus(root/'out')

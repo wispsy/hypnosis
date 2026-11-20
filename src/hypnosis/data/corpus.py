@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from .sources import APPROVAL,Source,bind_source
+from .sources import APPROVAL,CATALOG,Source,bind_source
 from .wiki import pages,clean_wikitext
 
 
@@ -128,7 +128,8 @@ def prepare_corpus(sources,destination,*,limits=None):
 
 def load_corpus(directory):
     directory=Path(directory)
-    manifest=(directory/'manifest.json').read_bytes()
+    with (directory/'manifest.json').open('rb') as stream:
+        manifest=stream.read(1024*1024+1)
     if len(manifest)>1024*1024: raise ValueError('Corpus manifest too large')
     receipt=json.loads(manifest)
     path=directory/'documents.jsonl'
@@ -137,8 +138,12 @@ def load_corpus(directory):
     if receipt.get('schema')!='hero-corpus/1' or len(raw)!=receipt['bytes'] or hashlib.sha256(raw).hexdigest()!=receipt['sha256']:
         raise ValueError('Corpus identity differs from its successful receipt')
     values=[json.loads(line) for line in raw.splitlines()]
-    if len(values)!=receipt['documents']: raise ValueError('Corpus record count differs')
+    if len(values)!=receipt['documents'] or not 1<=len(values)<=100000: raise ValueError('Corpus record count differs')
     for value in values:
-        if value['source_id'] not in receipt['sources'] or receipt['sources'][value['source_id']].get('approval')!=APPROVAL:
+        if value['source_id'] not in CATALOG or value['source_id'] not in receipt['sources'] or receipt['sources'][value['source_id']].get('approval')!=APPROVAL:
             raise ValueError('Corpus record lacks selected source approval')
+        if value['split'] not in ('train','validation','test') or type(value['text']) is not str or len(value['text'])>32768:
+            raise ValueError('Invalid corpus record')
+        if hashlib.sha256(' '.join(value['text'].split()).encode()).hexdigest()!=value['content_sha256']:
+            raise ValueError('Corpus content identity differs')
     return receipt,values
