@@ -40,4 +40,4 @@ Source = "https://github.com/wispsy/hypnosis"
 Project = "https://github.com/orgs/wispsy/projects/28"
 
 [tool.uv.build-backend]
-source-include = ["tests/**", "scripts/**", "IMPLEMENTATION_PLAN.md"]
+source-include = ["tests/**", "scripts/**", "experiments/**", "IMPLEMENTATION_PLAN.md"]

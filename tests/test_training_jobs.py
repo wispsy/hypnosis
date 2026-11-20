@@ -115,3 +115,12 @@ class TrainingJobTests(unittest.TestCase):
                 str(root/'run'),str(settings)],capture_output=True,text=True,timeout=30)
             self.assertEqual(trained.returncode,0,trained.stderr)
             self.assertEqual(json.loads(trained.stdout)['training']['step'],0)
+            from hypnosis.pilot_results import collect_completed_job
+            before=(root/'run/model.tft').read_bytes()
+            report=collect_completed_job(root/'run',root/'corpus',settings)
+            self.assertEqual(report,json.loads(trained.stdout))
+            self.assertEqual(before,(root/'run/model.tft').read_bytes())
+            # A durable report alone cannot authorize replay of uncertain effects.
+            progress=root/'run/workflow.json';value=json.loads(progress.read_text())
+            value['status']='paused';progress.write_text(json.dumps(value))
+            with self.assertRaises(ValueError): collect_completed_job(root/'run',root/'corpus',settings)

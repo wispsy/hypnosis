@@ -283,3 +283,19 @@ def run_job(corpus,destination,config,*,parent_artifact=None,recipe=None,retry=F
         raise
     if result.status!='completed': return {'status':str(result.status),'run_id':config.run_id}
     return _read(job.directory/'result.json')
+
+
+def benchmark_job(corpus,destination,*,steps=5):
+    """Measure a tiny fresh-model sample using the exact job preparation policy."""
+    from thoughtform.recipes import HERO,initialize
+    from thoughtformula import fit,parameter_count
+    if type(steps) is not int or not 1<=steps<=10: raise ValueError('Benchmark at most ten steps')
+    job=_Job(corpus,destination,JobConfig('pilot-probe',max_steps=steps,max_seconds=20),
+             HERO,None,None,None)
+    tokenizer,pairs,config,selection=job.setup()
+    model=initialize(HERO,tokenizer,seed=config.seed)
+    result=fit(model,pairs,config)
+    if result.state.step!=steps: raise ValueError('Benchmark did not complete within its bound')
+    return {'steps':steps,'seconds':result.state.elapsed_seconds,
+            'step_seconds':result.state.elapsed_seconds/steps,'parameters':parameter_count(model),
+            'vocabulary_size':len(tokenizer.vocab),'selection':selection,'recipe_sha256':HERO.sha256}
