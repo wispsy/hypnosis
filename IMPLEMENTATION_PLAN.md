@@ -79,3 +79,20 @@ and source outside the checkout, verify exact dependency sources, and run
 headless profiles on Linux/macOS/Windows. Prove native terminals separately.
 Public source development is authorized; package/weight uploads, releases,
 paid providers and deployment require their own concrete authorization.
+
+## Hero homegrown training continuation
+
+The [expanded canonical chapter](https://github.com/wispsy/wispsy/blob/main/docs/cohesion-block-b/hero-training.md)
+selects Hero, her Hero Coding specialization, independent Engl records,
+explicit source review and a combined 15-minute first training pilot.
+[HYP-SOURCE-01](https://github.com/wispsy/hypnosis/issues/13) records the approved
+internal recipe and candidate Python vault/docs/wiki sources. All future source
+additions remain owner-reviewed. The supplied local datasets support bounded
+compressed/indexed preparation; no full Wikipedia extraction is needed.
+
+The direct prepare/train/evaluate/register profile reuses func_seq and Backpack
+and does not require externally connected tools. Thoughtformula owns bounded
+pretraining, numerical evaluation and lossless optimizer resume; Thoughtform
+owns named recipes/local artifacts and parent lineage. Curriculum/shuffle and
+coding-child results require held-out counts/coverage and actual runtime/step
+receipts. Ollama and the selected-catalog/tool path remain deferred.
