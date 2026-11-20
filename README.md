@@ -49,3 +49,19 @@ terminal interaction is not claimed by those headless checks.
 
 See [the repository plan](IMPLEMENTATION_PLAN.md) and the
 [complete family plan](https://github.com/wispsy/wispsy/blob/main/docs/cohesion-block-b/IMPLEMENTATION_PLAN.md).
+
+## Approved homegrown training data
+
+The optional `data` profile reads explicitly selected local TinyStories,
+Wikipedia multistream bz2/index, Wiktextract and UD files. `hypnosis.data` exposes
+bounded corpus preparation with source snapshots, grouped held-out splits,
+deduplication, citation markers and reproducible corpus receipts. It never
+extracts the full Wikipedia dump or fetches reference URLs.
+
+Source IDs are admitted by the reviewed pilot catalog in
+[source review #13](https://github.com/wispsy/hypnosis/issues/13). The internally
+generated v1 pilot recipe is selected; the Python vault, Python docs/wiki and
+other future sources require their own reviewed snapshots/recipes. Fingerprints
+are labeled stat-plus-head/tail samples, not full-dump checksum verification.
+Exact selected corpus/block hashes retain reproducibility. Keep corpus outputs
+in caller-owned ignored local artifact directories.

@@ -20,6 +20,10 @@ requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
 
 [project.optional-dependencies]
+data = [
+    "mwparserfromhell==0.7.2",
+    "engl @ git+https://github.com/wispsy/engl.git@0d1de7f36a2cb4bc0b2eef28195c7046beda46ab",
+]
 models = ["thoughtform[thoughtformula] @ git+https://github.com/wispsy/thoughtform.git@e618ab5e41aee2f04f004e9df3c6a594112d2c8e"]
 
 [project.urls]
