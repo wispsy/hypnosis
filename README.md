@@ -137,3 +137,8 @@ are not replayed. Changed job identities and reused foreign destinations are
 refused. A new specialization and exact numerical resume are separate operations.
 Time limits are checked at step boundaries; the bounded pilot launcher also
 applies a hard combined process deadline. These pilot artifacts are experimental.
+
+Wikipedia citation names are scoped by reference group. Explicit conflicting
+bodies retain their own spans/URLs; an empty reuse of an ambiguous name stays
+unresolved. Reused long bodies inherit truncation metadata. Preserved citation
+associations remain provenance, not a verdict that the reference supports a claim.

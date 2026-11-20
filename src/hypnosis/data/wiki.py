@@ -83,14 +83,21 @@ def clean_wikitext(text,*,max_characters=4096):
         if start<0: raise ValueError('Reference span is not traceable')
         cursor=start+len(raw)
         name=str(tag.get('name').value).strip('"\' ') if tag.has('name') else ''
+        group=str(tag.get('group').value).strip('"\' ') if tag.has('group') else ''
+        if len(name)>256 or len(group)>256: raise ValueError('Reference name/group exceeds its bound')
         body=str(tag.contents) if tag.contents is not None else ''
-        key=name or f'unnamed-{number}'
-        if body: definitions[key]=body
-        references.append({'id':f'cite-{number}','name':name,'raw_start':start,'raw_end':cursor,
+        key=(group,name) if name else (None,number)
+        if body: definitions.setdefault(key,set()).add(body)
+        references.append({'id':f'cite-{number}','name':name,'group':group,'raw_start':start,'raw_end':cursor,
                            'body':body[:4096],'body_truncated':len(body)>4096,'key':key})
         code.replace(tag,f' [cite-{number}] ')
     for reference in references:
-        body=reference['body'] or definitions.get(reference['key'],'')[:4096]
+        candidates=definitions.get(reference['key'],set())
+        reference['ambiguous_name']=bool(reference['name'] and len(candidates)>1)
+        body=reference['body']
+        if not body and len(candidates)==1:
+            full=next(iter(candidates));body=full[:4096]
+            reference['body_truncated']=len(full)>4096
         reference['resolved']=bool(body);reference['body']=body
         reference['urls']=re.findall(r'https?://[^\s<>|}\]]+',body)[:16]
         reference.pop('key')
