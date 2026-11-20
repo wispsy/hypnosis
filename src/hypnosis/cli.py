@@ -22,6 +22,33 @@ def build_interface():
         from .terminal import run_terminal
         return await run_terminal(text=text)
 
+    @app.command(name='prepare')
+    def prepare(sources: str, destination: str, documents_per_source: int = 32, max_documents: int = 512):
+        """Prepare a finite corpus from an explicitly selected source JSON list."""
+        from .data import Source,DataLimits,prepare_corpus
+        from .training import _read
+        selected=_read(sources,65536)
+        if type(selected) is not list or not 1<=len(selected)<=16: raise ValueError('Select a finite source list')
+        receipt=prepare_corpus([Source(**value) for value in selected],destination,
+            limits=DataLimits(documents_per_source=documents_per_source,max_documents=max_documents))
+        return {'status':'completed','corpus':receipt}
+
+    @app.command(name='train')
+    def train(corpus: str, destination: str, config: str, parent_artifact: str = '', retry: bool = False):
+        """Run or explicitly recover a bounded homegrown training job."""
+        from .training import load_job,run_job
+        def progress(value): print(json.dumps(value,allow_nan=False),file=sys.stderr,flush=True)
+        return run_job(corpus,destination,load_job(config),parent_artifact=parent_artifact or None,
+                       retry=retry,observer=progress)
+
+    @app.command(name='train-terminal')
+    async def train_terminal(corpus: str, destination: str, config: str, parent_artifact: str = '', retry: bool = False):
+        """Run the same job with live Carets progress and cooperative cancellation."""
+        from .training import load_job
+        from .terminal import run_training_terminal
+        return await run_training_terminal(corpus,destination,load_job(config),
+            parent_artifact=parent_artifact or None,retry=retry)
+
     return app
 
 
