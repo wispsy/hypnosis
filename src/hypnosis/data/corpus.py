@@ -2,6 +2,7 @@
 from dataclasses import asdict,dataclass
 import hashlib
 import json
+from itertools import islice
 from pathlib import Path
 
 from .sources import APPROVAL,CATALOG,Source,bind_source
@@ -78,7 +79,10 @@ def documents(source,limits):
                 yield make(value.sentence_id,value.text,'ud:'+(getattr(value,'document_id',None) or value.sentence_id),{'sentence_id':value.sentence_id})
     elif source.kind=='generated':
         from ..curriculum import generated_documents
-        for value in generated_documents(seed=limits.seed): yield value
+        for value in islice(generated_documents(seed=limits.seed),limits.documents_per_source):
+            if len(value['text'])>limits.text_characters:
+                raise ValueError('An exercise exceeds the selected text budget')
+            yield value
 
 
 def prepare_corpus(sources,destination,*,limits=None):
