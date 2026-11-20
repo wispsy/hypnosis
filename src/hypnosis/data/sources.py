@@ -67,7 +67,8 @@ def file_snapshot(path):
 
 def bind_source(source):
     if source.kind=='generated':
-        return {'kind':'generator/1','recipe':'wispsy-internal-curriculum/v1','approval':APPROVAL}
+        from ..curriculum import RECIPE,RECIPE_SHA256
+        return {'kind':'generator/1','recipe':RECIPE,'recipe_sha256':RECIPE_SHA256,'approval':APPROVAL}
     snapshot=file_snapshot(source.path)
     if source.fingerprint is not None and source.fingerprint!=snapshot['fingerprint']:
         raise SourceApprovalError('Source differs from the selected snapshot')

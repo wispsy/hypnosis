@@ -101,3 +101,35 @@ HYP-MEMORY-01: typed structural training/evaluation/artifact receipts use Backpa
 public codecs and explicit storage paths. Verification closes the store, reopens
 it in a separate Python process, and checks idempotent recovery and conflicts.
 Raw source text, credentials and transcripts are excluded from job receipts.
+
+HYP-WORKFLOW-01: func_seq owns stage sequencing and progress. Identity-bound
+trusted stage definitions refuse incompatible recovery; tests demonstrate
+committed stages are not replayed and failed effects require explicit retry.
+The first profile does not depend on an external tool catalog or Ollama.
+
+HYP-EVAL-01: provider-neutral split measurement reports availability, tokenizer
+coverage/exclusions and exact selected record/token denominators. The native
+Thoughtformula loss adapter and nonexecuting syntax probes support fixed-budget
+experiments. Missing held-out splits are explicit unavailable results. Matched
+curriculum/shuffle comparison and small-sample limits belong in pilot receipts.
+HYP-CURRICULUM-01: the approved internal v1 generator is deterministic, finite,
+content-hashed and split by problem group. Tests independently verify every
+reference and demonstrate train/held-out separation and source-selection bounds.
+It contains no external teacher output or vault-derived material.
+
+HYP-TRAIN-01: the integrated local job composes the public Thoughtformula,
+Thoughtform, func_seq and Backpack APIs. Passive settings and corpus identities
+bind recovery. Tokenizer fitting is training-only, with explicit unknown-text
+counts and fixed per-document windows. Hero Coding starts from a fresh loaded
+Hero parent and records lineage. Native checkpoint and quantized inference
+exports stay local. The same owned worker emits bounded Carets progress and
+joins on cooperative cancellation. Source/CLI/Carets/parent-preservation and
+nonzero-step pause/retry tests cover the complete path; installed `training`
+profiles qualify the application on Linux, macOS and Windows.
+
+HERO-PILOT-02: completed-job receipt recollection validates the native artifact and
+func_seq state before reopening the identical CLI without retry authority. It
+retains original delivery diagnostics and respects the combined deadline. The
+matched shuffle acceptance in HERO-PILOT-01 remains open; no curriculum advantage
+or model promotion is claimed. Local training evidence stays in ignored run
+folders. The next source/window-mixture/runtime decision is tracked in #27.
