@@ -74,6 +74,24 @@ class DataTests(unittest.TestCase):
             with self.assertRaises(ValueError): prepare_corpus([Source('tinystories-train',str(path))],root/'out',limits=DataLimits(max_output_bytes=10))
             self.assertFalse((root/'out').exists())
 
+    @unittest.skipUnless(importlib.util.find_spec('mwparserfromhell'),'optional Wikipedia parser is not installed')
+    def test_conflicting_named_references_and_groups_remain_distinct(self):
+        from hypnosis.data.wiki import clean_wikitext
+        raw=("A<ref name='same'>https://example.org/a</ref>"
+             "B<ref name='same'>https://example.org/b</ref>"
+             "C<ref name='same'/>"
+             "D<ref name='same' group='other'>https://example.org/c</ref>"
+             "E<ref name='same' group='other'/>")
+        _text,refs,_metadata=clean_wikitext(raw)
+        self.assertEqual(refs[0]['urls'],['https://example.org/a'])
+        self.assertEqual(refs[1]['urls'],['https://example.org/b'])
+        self.assertTrue(refs[2]['ambiguous_name']);self.assertFalse(refs[2]['resolved'])
+        self.assertEqual(refs[2]['urls'],[])
+        self.assertEqual(refs[4]['urls'],['https://example.org/c'])
+        self.assertFalse(refs[4]['ambiguous_name'])
+        _text,refs,_metadata=clean_wikitext("A<ref name='long'>"+'x'*5000+"</ref>B<ref name='long'/>")
+        self.assertTrue(refs[1]['body_truncated'])
+
     def test_loading_does_not_admit_new_source_ids_through_a_receipt(self):
         with TemporaryDirectory() as directory:
             root=Path(directory);path=root/'TinyStories-train.txt'

@@ -133,3 +133,8 @@ retains original delivery diagnostics and respects the combined deadline. The
 matched shuffle acceptance in HERO-PILOT-01 remains open; no curriculum advantage
 or model promotion is claimed. Local training evidence stays in ignored run
 folders. The next source/window-mixture/runtime decision is tracked in #27.
+
+HYP-DATA-02: citation provenance preserves reference groups and explicit bodies,
+marks conflicting named reuse unresolved, and propagates truncation metadata.
+Authored parser fixtures qualify the behavior without touching existing corpora
+or performing additional model training.
