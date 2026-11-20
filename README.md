@@ -71,3 +71,9 @@ versioned `TrainingReceipt`, `EvaluationReceipt` and `ArtifactReceipt` values at
 an explicit local SQLite path. Records hold identities and measurements, without
 source text or transcripts. A repeated matching write is idempotent for workflow
 recovery; a conflicting receipt is refused. One workflow owns the job writer.
+
+The optional `workflow` profile composes explicit trusted prepare, train,
+evaluate and register callables with func_seq. `WorkflowIdentity` binds corpus,
+source selection, recipe and job configuration into its version. Its existing
+checkpoint preserves completed stages and requires explicit retry/restart after
+an uncertain interrupted effect. Native numerical checkpoints remain separate.

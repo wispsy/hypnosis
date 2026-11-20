@@ -101,3 +101,8 @@ HYP-MEMORY-01: typed structural training/evaluation/artifact receipts use Backpa
 public codecs and explicit storage paths. Verification closes the store, reopens
 it in a separate Python process, and checks idempotent recovery and conflicts.
 Raw source text, credentials and transcripts are excluded from job receipts.
+
+HYP-WORKFLOW-01: func_seq owns stage sequencing and progress. Identity-bound
+trusted stage definitions refuse incompatible recovery; tests demonstrate
+committed stages are not replayed and failed effects require explicit retry.
+The first profile does not depend on an external tool catalog or Ollama.
