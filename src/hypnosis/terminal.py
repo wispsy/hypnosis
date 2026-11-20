@@ -92,15 +92,34 @@ class Renderer:
         return self.renderer.render(view)
 
 
-async def run_terminal(*, text='Hello from Hypnosis.', messages=None, input_stream=None, output_stream=None):
+async def run_terminal(*, text='Hello from Hypnosis.', messages=None, input_stream=None, output_stream=None,
+                       factory=None, harness=None, run_id='terminal'):
     input_stream = sys.stdin.buffer if input_stream is None else input_stream
     output_stream = sys.stderr if output_stream is None else output_stream
     session = TerminalSession(input_stream, output_stream, options=TerminalOptions(alternate_screen=True))
     if messages is None and (not session.capabilities.raw or not session.capabilities.tty):
         raise ValueError('Interactive mode requires a supported POSIX TTY')
-    model = HarnessTerminal(lambda: demo_source(text), exit_on_completion=messages is not None)
+    model = HarnessTerminal(factory if factory is not None else lambda: demo_source(text),
+        harness=harness,run_id=run_id,exit_on_completion=messages is not None)
     program = model.program = Program(model, renderer=Renderer(model), terminal=session,
         input_stream=input_stream, output_stream=output_stream, stream_buffer=32)
     command = model.start()
     await program.run(messages, stop_on_eof=messages is None, commands=[command])
     return {'schema': 1, 'status': model.status, 'code': model.code}
+
+
+async def run_training_terminal(corpus,destination,config,*,parent_artifact=None,retry=False,
+                                messages=None,input_stream=None,output_stream=None):
+    from .execution import job_progress
+    from .runtime import RunLimits
+    from .training import run_job
+    result={}
+    def job(observer,stop):
+        completed=run_job(corpus,destination,config,parent_artifact=parent_artifact,
+                          retry=retry,observer=observer,stop=stop)
+        result.update(completed)
+        return completed
+    terminal=await run_terminal(factory=lambda:job_progress(job),run_id=config.run_id,
+        harness=Harness(RunLimits(max_seconds=min(3600,config.max_seconds+30),max_output_bytes=1024*1024)),
+        messages=messages,input_stream=input_stream,output_stream=output_stream)
+    return {**terminal,'job_status':result.get('status','unavailable'),'run_id':config.run_id}

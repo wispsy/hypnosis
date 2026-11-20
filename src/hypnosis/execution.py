@@ -1,6 +1,8 @@
 """Cooperative token execution outside the terminal event loop."""
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
+import json
+from threading import Event
 
 
 def _next(iterator):
@@ -60,3 +62,41 @@ async def model_text(adapter, prompt):
     async with aclosing(from_sync(pieces)) as source:
         async for text in source:
             yield text
+
+
+async def job_progress(job):
+    """Run one trusted callback-based job on an owned worker with backpressure.
+
+    The job receives an observer and a cooperative stop predicate. Closing the
+    stream requests a saved step boundary, drains pending messages and joins the
+    worker. A native optimizer step cannot be forcibly interrupted by this UI.
+    """
+    loop=asyncio.get_running_loop();queue=asyncio.Queue(maxsize=8);stop=Event()
+    executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='hypnosis-training')
+    def emit(value):
+        raw=json.dumps(value,sort_keys=True,allow_nan=False,separators=(',',':'))+'\n'
+        if len(raw.encode())>8192: raise ValueError('Training progress event is too large')
+        asyncio.run_coroutine_threadsafe(queue.put(raw),loop).result()
+    def work():
+        try:
+            result=job(emit,stop.is_set)
+            emit({'kind':'outcome','status':result['status']})
+            return result
+        finally:
+            asyncio.run_coroutine_threadsafe(queue.put(None),loop).result()
+    future=loop.run_in_executor(executor,work)
+    try:
+        while True:
+            value=await queue.get()
+            if value is None: break
+            yield value
+        await asyncio.shield(future)
+    finally:
+        stop.set()
+        try:
+            while not future.done():
+                try: await asyncio.wait_for(queue.get(),timeout=0.1)
+                except TimeoutError: pass
+            await asyncio.shield(future)
+        finally:
+            executor.shutdown(wait=True,cancel_futures=True)
