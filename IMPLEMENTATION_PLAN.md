@@ -96,3 +96,8 @@ pretraining, numerical evaluation and lossless optimizer resume; Thoughtform
 owns named recipes/local artifacts and parent lineage. Curriculum/shuffle and
 coding-child results require held-out counts/coverage and actual runtime/step
 receipts. Ollama and the selected-catalog/tool path remain deferred.
+
+HYP-MEMORY-01: typed structural training/evaluation/artifact receipts use Backpack
+public codecs and explicit storage paths. Verification closes the store, reopens
+it in a separate Python process, and checks idempotent recovery and conflicts.
+Raw source text, credentials and transcripts are excluded from job receipts.

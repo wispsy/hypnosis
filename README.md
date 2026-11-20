@@ -65,3 +65,9 @@ other future sources require their own reviewed snapshots/recipes. Fingerprints
 are labeled stat-plus-head/tail samples, not full-dump checksum verification.
 Exact selected corpus/block hashes retain reproducibility. Keep corpus outputs
 in caller-owned ignored local artifact directories.
+
+The optional `records` profile uses Backpack Store directly. `RunLedger` persists
+versioned `TrainingReceipt`, `EvaluationReceipt` and `ArtifactReceipt` values at
+an explicit local SQLite path. Records hold identities and measurements, without
+source text or transcripts. A repeated matching write is idempotent for workflow
+recovery; a conflicting receipt is refused. One workflow owns the job writer.
