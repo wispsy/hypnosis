@@ -96,3 +96,8 @@ pretraining, numerical evaluation and lossless optimizer resume; Thoughtform
 owns named recipes/local artifacts and parent lineage. Curriculum/shuffle and
 coding-child results require held-out counts/coverage and actual runtime/step
 receipts. Ollama and the selected-catalog/tool path remain deferred.
+
+HYP-CURRICULUM-01: the approved internal v1 generator is deterministic, finite,
+content-hashed and split by problem group. Tests independently verify every
+reference and demonstrate train/held-out separation and source-selection bounds.
+It contains no external teacher output or vault-derived material.

@@ -65,3 +65,10 @@ other future sources require their own reviewed snapshots/recipes. Fingerprints
 are labeled stat-plus-head/tail samples, not full-dump checksum verification.
 Exact selected corpus/block hashes retain reproducibility. Keep corpus outputs
 in caller-owned ignored local artifact directories.
+
+`hypnosis.curriculum.generated_documents` implements the explicitly approved
+`wispsy-internal-curriculum/v1` pilot: exact addition/multiplication answers and
+Python addition, even-number filtering and list-sum references. Seeds and recipe
+hashes identify the generated material. Related arithmetic and Python variants
+share a split group. Reference code is authored and independently checked;
+model-generated code is never executed. New recipes and sources require review.
