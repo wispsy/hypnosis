@@ -116,3 +116,20 @@ HYP-CURRICULUM-01: the approved internal v1 generator is deterministic, finite,
 content-hashed and split by problem group. Tests independently verify every
 reference and demonstrate train/held-out separation and source-selection bounds.
 It contains no external teacher output or vault-derived material.
+
+HYP-TRAIN-01: the integrated local job composes the public Thoughtformula,
+Thoughtform, func_seq and Backpack APIs. Passive settings and corpus identities
+bind recovery. Tokenizer fitting is training-only, with explicit unknown-text
+counts and fixed per-document windows. Hero Coding starts from a fresh loaded
+Hero parent and records lineage. Native checkpoint and quantized inference
+exports stay local. The same owned worker emits bounded Carets progress and
+joins on cooperative cancellation. Source/CLI/Carets/parent-preservation and
+nonzero-step pause/retry tests cover the complete path; installed `training`
+profiles qualify the application on Linux, macOS and Windows.
+
+HERO-PILOT-02: completed-job receipt recollection validates the native artifact and
+func_seq state before reopening the identical CLI without retry authority. It
+retains original delivery diagnostics and respects the combined deadline. The
+matched shuffle acceptance in HERO-PILOT-01 remains open; no curriculum advantage
+or model promotion is claimed. Local training evidence stays in ignored run
+folders. The next source/window-mixture/runtime decision is tracked in #27.
