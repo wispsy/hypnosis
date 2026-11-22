@@ -8,7 +8,7 @@ from expose_interface import Interface, UsageError
 from .runtime import run_demo
 
 
-def build_interface():
+def build_interface(*, output_stream=None):
     app = Interface('hypnosis', description='Bounded harness execution and terminal presentation.')
 
     @app.command(name='demo')
@@ -16,11 +16,33 @@ def build_interface():
         """Run the deterministic offline producer headlessly."""
         return await run_demo(text)
 
+    @app.command(name='stream')
+    async def stream(text: str = 'Hello from Hypnosis.'):
+        """Emit bounded wispsy.run-event/1 JSONL from the offline producer."""
+        from .process import StreamResult, write_run_stream
+        from .runtime import demo_source
+        output = sys.stdout if output_stream is None else output_stream
+        return StreamResult(await write_run_stream(lambda: demo_source(text), output))
+
     @app.command(name='terminal')
     async def terminal(text: str = 'Hello from Hypnosis.'):
         """Open the Carets application on a supported POSIX TTY."""
         from .terminal import run_terminal
         return await run_terminal(text=text)
+
+    @app.command(name='application-demo')
+    async def application_demo(artifact: str = '', prompt: str = 'def solve(a, b):\n    ', database: str = '', run_id: str = 'application'):
+        """Run the full offline application, optionally probing a local native artifact."""
+        from .application import run_application_demo
+        report = await run_application_demo(artifact=artifact, prompt=prompt, database=database, run_id=run_id)
+        return {'schema': 1, **report.receipt()}
+
+    @app.command(name='app')
+    async def app_command(artifact: str = '', prompt: str = 'def solve(a, b):\n    ', database: str = '', checkpoint_database: str = '', checkpoint_root: str = ''):
+        """Open the harness workbench with jobs, evidence, trials and checkpoints."""
+        from .workbench import run_workbench
+        return await run_workbench(artifact=artifact, prompt=prompt, database=database,
+            checkpoint_database=checkpoint_database, checkpoint_root=checkpoint_root)
 
     @app.command(name='prepare')
     def prepare(sources: str, destination: str, documents_per_source: int = 32, max_documents: int = 512):
@@ -68,8 +90,14 @@ def build_interface():
 
 def main(argv=None):
     try:
+        output = sys.stdout
         with contextlib.redirect_stdout(sys.stderr):
-            result = build_interface().invoke(argv)
+            result = build_interface(output_stream=output).invoke(argv)
+        from .process import StreamResult
+        if isinstance(result, StreamResult):
+            if result.exit_code:
+                raise SystemExit(result.exit_code)
+            return 0
         if result is not None:
             print(json.dumps(result, ensure_ascii=True, allow_nan=False, separators=(',', ':')))
             if result.get('status') != 'completed':
