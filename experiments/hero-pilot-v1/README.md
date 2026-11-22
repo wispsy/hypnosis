@@ -69,3 +69,7 @@ Native `.tft` and quantized `.mgpt` artifacts reload with matching tokenizers an
 step counts. Inference exports embed neither raw corpus segments nor RAG source
 documents. The report contains measurements and hashes; it distributes no source
 text, generated continuations, tokenizer vocabulary, credentials or weights.
+
+The 21 November [v2 follow-up](../hero-session-v2/README.md#matched-v1-shuffle-follow-up)
+completes the previously missing matched shuffle comparison. This original
+receipt remains the record of the first execution window.
