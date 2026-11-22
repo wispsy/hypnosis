@@ -8,13 +8,21 @@ from expose_interface import Interface, UsageError
 from .runtime import run_demo
 
 
-def build_interface():
+def build_interface(*, output_stream=None):
     app = Interface('hypnosis', description='Bounded harness execution and terminal presentation.')
 
     @app.command(name='demo')
     async def demo(text: str = 'Hello from Hypnosis.'):
         """Run the deterministic offline producer headlessly."""
         return await run_demo(text)
+
+    @app.command(name='stream')
+    async def stream(text: str = 'Hello from Hypnosis.'):
+        """Emit bounded wispsy.run-event/1 JSONL from the offline producer."""
+        from .process import StreamResult, write_run_stream
+        from .runtime import demo_source
+        output = sys.stdout if output_stream is None else output_stream
+        return StreamResult(await write_run_stream(lambda: demo_source(text), output))
 
     @app.command(name='terminal')
     async def terminal(text: str = 'Hello from Hypnosis.'):
@@ -68,8 +76,14 @@ def build_interface():
 
 def main(argv=None):
     try:
+        output = sys.stdout
         with contextlib.redirect_stdout(sys.stderr):
-            result = build_interface().invoke(argv)
+            result = build_interface(output_stream=output).invoke(argv)
+        from .process import StreamResult
+        if isinstance(result, StreamResult):
+            if result.exit_code:
+                raise SystemExit(result.exit_code)
+            return 0
         if result is not None:
             print(json.dumps(result, ensure_ascii=True, allow_nan=False, separators=(',', ':')))
             if result.get('status') != 'completed':
