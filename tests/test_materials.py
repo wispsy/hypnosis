@@ -18,7 +18,8 @@ class MaterialTests(unittest.TestCase):
             path=vault/'tutorials/functions.md'
             raw=('# Functions\n\nRef: [Official](https://docs.python.org/3/tutorial/controlflow.html#functions)\n\n'
                  'A function returns a value.\n\n```python\ndef f(x):\n    return x + 1\n```\n')
-            path.write_text(raw)
+            raw=raw.replace('\n','\r\n')
+            path.write_bytes(raw.encode('utf-8'))
             source=Source('python-vault-tutorials',str(vault));snapshot=bind_source(source)
             with self.assertRaises(ValueError): prepare_corpus([source],root/'unbound')
             selected=replace(source,fingerprint=snapshot['fingerprint'])
