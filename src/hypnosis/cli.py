@@ -30,6 +30,20 @@ def build_interface(*, output_stream=None):
         from .terminal import run_terminal
         return await run_terminal(text=text)
 
+    @app.command(name='application-demo')
+    async def application_demo(artifact: str = '', prompt: str = 'def solve(a, b):\n    ', database: str = '', run_id: str = 'application'):
+        """Run the full offline application, optionally probing a local native artifact."""
+        from .application import run_application_demo
+        report = await run_application_demo(artifact=artifact, prompt=prompt, database=database, run_id=run_id)
+        return {'schema': 1, **report.receipt()}
+
+    @app.command(name='app')
+    async def app_command(artifact: str = '', prompt: str = 'def solve(a, b):\n    ', database: str = '', checkpoint_database: str = '', checkpoint_root: str = ''):
+        """Open the harness workbench with jobs, evidence, trials and checkpoints."""
+        from .workbench import run_workbench
+        return await run_workbench(artifact=artifact, prompt=prompt, database=database,
+            checkpoint_database=checkpoint_database, checkpoint_root=checkpoint_root)
+
     @app.command(name='prepare')
     def prepare(sources: str, destination: str, documents_per_source: int = 32, max_documents: int = 512):
         """Prepare a finite corpus from an explicitly selected source JSON list."""

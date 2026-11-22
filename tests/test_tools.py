@@ -50,3 +50,7 @@ class ToolTests(unittest.IsolatedAsyncioTestCase):
         def large()->str:return 'private'*10
         result=await ToolExecutor(self.catalog({'large':large}),ToolPolicy(('large',),max_output_bytes=4)).invoke(ToolRequest('large','large',{}))
         self.assertEqual(result.code,'output_budget');self.assertIsNone(result.value)
+        runner=ToolExecutor(self.catalog({'large':large}),ToolPolicy(('large',),max_output_bytes=100))
+        self.assertEqual((await runner.invoke(ToolRequest('one','large',{}))).status,'completed')
+        self.assertEqual((await runner.invoke(ToolRequest('two','large',{}))).code,'output_budget')
+        self.assertLessEqual(runner.output_bytes,100)
