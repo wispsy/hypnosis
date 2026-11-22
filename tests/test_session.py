@@ -1,4 +1,5 @@
 import importlib.util
+from datetime import datetime,timedelta
 import json
 from pathlib import Path
 import subprocess
@@ -29,6 +30,9 @@ class SessionTests(unittest.TestCase):
             self.assertEqual(completed.returncode,0,completed.stderr+'\n'+completed.stdout)
             result=json.loads((root/'session/session.json').read_text())
             self.assertTrue(result['fixture_smoke']);self.assertEqual(result['status'],'completed')
+            scheduled=datetime.strptime(result['scheduled_stop_pst'],'%Y-%m-%d %I:%M:%S %p PST')
+            utc=datetime.fromisoformat(result['scheduled_stop_utc']).replace(tzinfo=None,microsecond=0)
+            self.assertEqual(utc-scheduled,timedelta(hours=8))
             self.assertTrue(result['matched_pilot']['matched'])
             self.assertEqual(result['runs']['hero-continued']['training']['step'],4)
             self.assertEqual(result['runs']['hero-coding']['training']['step'],2)

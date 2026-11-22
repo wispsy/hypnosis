@@ -7,7 +7,8 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-from zoneinfo import ZoneInfo
+
+PST=timezone(timedelta(hours=-8),'PST')
 
 
 def write(path,value):
@@ -35,12 +36,15 @@ def _run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=Fals
     for name in ('hero','hero-coding'):
         index_run(previous_pilot/name,database,collection_root)
     started=time.monotonic();deadline=started+budget;now=datetime.now(timezone.utc)
+    stop=now+timedelta(seconds=budget)
     schedule={'started_utc':now.isoformat(),'budget_seconds':budget,
-        'scheduled_stop_pst':(now+timedelta(seconds=budget)).astimezone(ZoneInfo('America/Los_Angeles')).strftime('%Y-%m-%d %I:%M:%S %p %Z')}
+        'scheduled_stop_utc':stop.isoformat(),
+        'scheduled_stop_pst':stop.astimezone(PST).strftime('%Y-%m-%d %I:%M:%S %p %Z')}
     if prior is not None:
         elapsed=(now-datetime.fromisoformat(prior['started_utc'])).total_seconds()
         started-=elapsed;deadline=started+budget
         schedule={key:prior[key] for key in ('started_utc','budget_seconds','scheduled_stop_pst')}
+        schedule['scheduled_stop_utc']=(datetime.fromisoformat(prior['started_utc'])+timedelta(seconds=budget)).isoformat()
         if deadline<=time.monotonic(): raise TimeoutError('Original session deadline has passed')
     summary={'schema':'hero-session/2',**schedule,'fixture_smoke':smoke,'corpus_sha256':current['sha256'],
         'corpus':{k:current[k] for k in ('documents','splits','bytes')},'runs':{},'status':'running',
