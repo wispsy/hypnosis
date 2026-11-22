@@ -44,3 +44,32 @@ new family's frozen vocabulary. Code/general held-out losses and syntax probes
 are separate measurements. Losses across tokenizer families are not directly
 comparable. Single-seed results do not establish factual accuracy, functional
 coding or autonomous training-agent ability; nothing is automatically promoted.
+
+## Measurement export
+
+`report.py` exports a finished local session through a closed set of aggregate
+fields. It includes measured losses/coverage/denominators, actual source counts,
+checkpoint hashes and frozen runtime identities. Private paths, source text,
+selected document IDs, raw vocabulary and full inventories are excluded. The
+output is a new file; an existing report is never overwritten.
+
+```sh
+python experiments/hero-session-v2/report.py \
+  .runs/selected/session.json .runs/selected/runtime.json \
+  .runs/selected/controller-recovery.json .runs/selected/controller.py \
+  experiments/hero-session-v2/results-selected.json
+```
+
+The 21 November measured runtime is the installed wheel built from `e89bb00`,
+with its exact dependency revisions recorded in the receipt. The archived
+`controller-recovery-2026-11-21.patch`, applied to that commit's controller,
+reconstructs the measured recovery controller SHA. Subsequent ownership/recovery
+and portable time-display fixes do not change its training mathematics. The
+matching wheel and controller are also retained in the local session directory.
+
+Continuation source-window/token counts describe the cumulative native trajectory.
+Per-job counters and the report's totals avoid counting the foundation twice.
+`unique_windows` counts sampled document/window positions before deliberate
+oversampling; it is not a claim that every encoded token sequence differs.
+Collection record counts include intermediate/final aliases; the report also
+counts unique native checkpoint hashes.
