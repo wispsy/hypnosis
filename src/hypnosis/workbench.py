@@ -56,13 +56,27 @@ class Workbench:
         self.checkpoints = tuple(checkpoints)[:128]
         self._worker_result = {}
 
+    def settle_outcome(self):
+        """Read joined worker state even when shutdown stopped message delivery."""
+        report = self._worker_result.get('report')
+        if report is not None:
+            self.report, self.status = report, report.status
+        elif self.status == 'running':
+            self.status = 'failed' if 'error' in self._worker_result else 'canceled'
+            if 'error' in self._worker_result:
+                self.code = 'command_error'
+
     def start(self):
         if self.status != 'ready':
             return None
         self.status = 'running'
         def job(observer, stop):
-            report = asyncio.run(self.factory(observer=observer,
-                stop=lambda: stop() or self.cancel_requested.is_set()))
+            try:
+                report = asyncio.run(self.factory(observer=observer,
+                    stop=lambda: stop() or self.cancel_requested.is_set()))
+            except BaseException as error:
+                self._worker_result['error'] = type(error).__name__
+                raise
             self._worker_result['report'] = report
             return {'status': report.status}
         async def produce():
@@ -195,6 +209,9 @@ async def run_workbench(*, artifact='', prompt='def solve(a, b):\n    ', databas
     model = Workbench(factory, database=database, checkpoints=checkpoints, exit_on_completion=messages is not None)
     program = model.program = Program(model, renderer=CellDiffRenderer(), terminal=session,
         input_stream=input_stream, output_stream=output_stream, stream_buffer=32, frame_interval=1/30)
-    await program.run(messages, stop_on_eof=messages is None, commands=[model.start()])
+    try:
+        await program.run(messages, stop_on_eof=messages is None, commands=[model.start()])
+    finally:
+        model.settle_outcome()
     return {'schema': 1, 'status': model.status, 'code': model.code,
             'identity_sha256': model.report.identity_sha256 if model.report else None}

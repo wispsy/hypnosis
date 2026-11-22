@@ -8,6 +8,7 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 AVAILABLE = all(importlib.util.find_spec(name) for name in ('hidden_moves', 'hidden_moves_workspace', 'parse_md', 'func_seq', 'backpack_store', 'headless_spreadsheets'))
 
@@ -81,6 +82,38 @@ class WorkbenchTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(model.status, 'canceled')
             self.assertEqual(closed, [True])
         self.assertEqual(app.terminal.restore_count, 1)
+
+    async def test_direct_signal_shutdown_reports_joined_worker_outcome(self):
+        from threading import Event
+        from carets import TerminalSession
+        from carets.testing import FakeTerminal
+        from hypnosis.application import run_application_demo
+        from hypnosis.workbench import run_workbench
+        report = await run_application_demo()
+        started, settled = Event(), Event()
+        async def factory(*, observer, stop):
+            started.set()
+            try:
+                while not stop():
+                    await asyncio.sleep(.005)
+                return replace(report, status='canceled')
+            finally:
+                settled.set()
+        terminal = FakeTerminal()
+        session = TerminalSession(terminal.input, terminal.output, backend=terminal)
+        with patch('hypnosis.workbench.TerminalSession', return_value=session):
+            task = asyncio.create_task(run_workbench(messages=[], input_stream=terminal.input,
+                output_stream=terminal.output, factory=factory))
+            for _ in range(200):
+                if started.is_set() and 'terminate' in terminal.handlers:
+                    break
+                await asyncio.sleep(.005)
+            self.assertTrue(started.is_set())
+            terminal.handlers['terminate']()
+            outcome = await asyncio.wait_for(task, 5)
+        self.assertEqual(outcome['status'], 'canceled')
+        self.assertTrue(settled.is_set())
+        self.assertEqual(terminal.restore_count, 1)
 
     @unittest.skipUnless(importlib.util.find_spec('thoughtformula'), 'native models profile required')
     async def test_explicit_native_artifact_is_loaded_without_weight_training(self):
