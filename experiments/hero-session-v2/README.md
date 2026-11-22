@@ -16,6 +16,8 @@ The selected combined experiment ceiling is one hour:
 
 The remaining time covers checkpoint/evaluation/collection work. Every child has
 the remaining hard combined deadline. Native jobs also stop at optimizer boundaries.
+Schedule receipts include UTC and fixed-offset PST (UTC−08:00), independent of
+the host's optional time-zone database.
 Run the controller with an installed frozen `training` profile so development or
 branch changes cannot alter a running session:
 
