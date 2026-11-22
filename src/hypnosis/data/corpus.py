@@ -5,7 +5,7 @@ import json
 from itertools import islice
 from pathlib import Path
 
-from .sources import APPROVAL,CATALOG,Source,bind_source
+from .sources import APPROVAL,CATALOG,Source,bind_source,source_approval
 from .wiki import pages,clean_wikitext
 
 
@@ -83,6 +83,9 @@ def documents(source,limits):
             if len(value['text'])>limits.text_characters:
                 raise ValueError('An exercise exceeds the selected text budget')
             yield value
+    elif source.kind in ('markdown','python-docs'):
+        from .materials import material_documents
+        yield from material_documents(source,bind_source(source),limits)
 
 
 def prepare_corpus(sources,destination,*,limits=None):
@@ -144,7 +147,7 @@ def load_corpus(directory):
     values=[json.loads(line) for line in raw.splitlines()]
     if len(values)!=receipt['documents'] or not 1<=len(values)<=100000: raise ValueError('Corpus record count differs')
     for value in values:
-        if value['source_id'] not in CATALOG or value['source_id'] not in receipt['sources'] or receipt['sources'][value['source_id']].get('approval')!=APPROVAL:
+        if value['source_id'] not in CATALOG or value['source_id'] not in receipt['sources'] or receipt['sources'][value['source_id']].get('approval')!=source_approval(value['source_id']):
             raise ValueError('Corpus record lacks selected source approval')
         if value['split'] not in ('train','validation','test') or type(value['text']) is not str or len(value['text'])>32768:
             raise ValueError('Invalid corpus record')

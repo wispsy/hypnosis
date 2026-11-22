@@ -143,3 +143,70 @@ HYP-DATA-02: citation provenance preserves reference groups and explicit bodies,
 marks conflicting named reuse unresolved, and propagates truncation metadata.
 Authored parser fixtures qualify the behavior without touching existing corpora
 or performing additional model training.
+## Session v2 — approved Python materials and checkpoint collections
+
+Selected 21 November 2026 from the owner's instruction on hypnosis #27. All
+current materials in `_datasets/python3_vault/`, the `psf_wiki/` clone, and the
+Python 3.14 documentation archives are approved for local training. Recipe and
+progression selection is delegated for this session. Future additions remain
+separate selections. Raw text and weights stay local; sanitized measurements
+and code/CI receipts use the existing publication authorization.
+
+### Delivery batches
+
+1. HYP-VAULT-01: snapshot approved Markdown/text-archive selections with complete
+   file/member hashes, root-relative paths, source references and bounded reads.
+   Reuse Parse MD for Markdown structure and code spans. Prefer the documentation
+   text archive; HTML/EPUB/texinfo are duplicate views, not additional samples.
+   Preserve source derivation and label migrated community wiki material.
+   Never run downloaded code or follow embedded links. Group chunks from a page
+   and explicit documentation-derived notes together before held-out splitting.
+2. TFORM-03: add named `balanced-v2` Hero/Hero Coding recipes in Thoughtform,
+   retaining the pilot recipes. Start at width 64, two layers, two experts,
+   hidden width 128; measure actual parameter count/throughput before training.
+   A new tokenizer/model family is trained from scratch; previous artifacts stay
+   intact. Coding specialization preserves the new parent's vocabulary/shape.
+3. HYP-MIX-01: source quotas and weighted document/window interleaving eliminate
+   first-source starvation. Fit tokenizer merges only on training material and
+   include every selected training character plus the declared ASCII alphabet.
+   Keep the `pilot-v1` preparation/serialization exactly compatible so old jobs
+   and the matched baseline retain their original corpus/pair/tokenizer identity.
+4. HYP-CHECKPOINT-01: longer finite jobs retain immutable periodic native snapshots
+   and passive artifact sidecars. Reuse Backpack for a typed local collection
+   index, not a new storage engine. Keep latest recovery state separate from
+   retained history. Validate pause/retry and fresh-process inventory, enforce
+   retained-file/byte limits and preserve every existing checkpoint.
+5. HERO-SESSION-02: bounded one-hour combined experiment window. Reserve up to
+   eight minutes for the 1,478-step old shuffled baseline, thirty minutes for the
+   new balanced Hero, eighteen minutes for Hero Coding, with four minutes for
+   probes/evaluation/checkpoint IO. Use hard remaining-time child deadlines,
+   print the scheduled stop in PST, and collect results while doing independent
+   CI/documentation work. A timeout preserves the last complete native snapshot.
+6. HERO-QA-02: installed source/wheel qualification and exact merged source pins;
+   update the canonical plan, source cards, issues and Project evidence.
+
+### Initial source mixture
+
+Hero window weights: internal v1 exercises 20; vault tutorials 20; TinyStories
+20; Simple English Wikipedia 10; UD English 5; Wiktionary 5; vault references 5;
+Python 3.14 docs 10; selected Python community wiki 5. Official train/dev/test
+splits stay fixed. Document/reference groups and exact-content deduplication
+keep held-out material separate. Report actual source windows consumed.
+
+Hero Coding weights: vault tutorials 30; Python 3.14 docs 35; approved internal
+Python exercises 20; vault references 10; Python community wiki 5. Retain a small
+fixed general-language evaluation alongside coding-source measurements to show
+regression/forgetting. Syntax is parsed, never executed as model-generated code.
+
+### Acceptance and limits
+
+All selected source IDs must receive windows, vocabulary coverage/exclusions and
+record/token denominators must be explicit, and old completed jobs must reopen
+without replay. Keep periodic checkpoints with run/model/recipe/corpus/tokenizer/
+parent/optimizer identity and immutable filenames. Publish aggregate receipts,
+not training text, weights or private paths. Compare old Hero/shuffle only when
+step, pair, tokenizer and initialization identities match. New-family losses
+are not directly compared numerically with v1 across different tokenizers.
+Tiny short-run models remain experimental; no factual, functional coding or
+autonomous training-agent claim follows from loss or syntax. No Ollama/external
+teacher, paid provider, package release or model-weight publication is selected.

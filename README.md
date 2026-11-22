@@ -142,3 +142,13 @@ Wikipedia citation names are scoped by reference group. Explicit conflicting
 bodies retain their own spans/URLs; an empty reuse of an ambiguous name stays
 unresolved. Reused long bodies inherit truncation metadata. Preserved citation
 associations remain provenance, not a verdict that the reference supports a claim.
+
+Approved Python material sources now include `python-vault-tutorials`,
+`python-vault-reference`, `psf-wiki-python` and `python314-docs`. Their approval
+is recorded in issue #27. `bind_source(Source(...))` returns a complete selected
+snapshot fingerprint; put that fingerprint in the selected Source before corpus
+preparation. Changed/added selected files are rejected. Markdown uses Parse MD
+source spans and code blocks; documentation members stream from the text archive
+without extraction. References and derivation remain attached, and related page
+chunks share a held-out group. Alternate documentation formats are not duplicate
+training samples. Downloaded examples are data and are never executed.
