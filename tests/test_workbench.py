@@ -19,7 +19,7 @@ class WorkbenchTests(unittest.IsolatedAsyncioTestCase):
         with TemporaryDirectory() as temporary:
             database = Path(temporary)/'receipts.db'
             report = await run_application_demo(database=database)
-            self.assertEqual(report.status, 'completed')
+            self.assertEqual(report.status, 'completed', report.receipt())
             self.assertEqual([a['passed'] for a in report.verification['attempts']], [False, True])
             self.assertEqual(len(report.tools), 2)
             self.assertEqual(report.trials.recommendation, 'candidate')
@@ -44,7 +44,7 @@ class WorkbenchTests(unittest.IsolatedAsyncioTestCase):
                 await app.settle()
                 if model.status != 'running':
                     break
-            self.assertEqual(model.status, 'completed')
+            self.assertEqual(model.status, 'completed', model.report.receipt() if model.report else model.code)
             for index in range(1, 8):
                 await app.send(KeyMsg(str(index)))
                 await app.resize(22, 6)

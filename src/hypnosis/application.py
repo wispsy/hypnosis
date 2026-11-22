@@ -172,7 +172,7 @@ async def run_application_demo(*, run_id='application', artifact='', prompt='def
     with TemporaryDirectory() as temporary:
         root = Path(temporary)
         material = '# Exercise\nCompute 2 + 3 and verify the saved result.\n'
-        (root/'task.md').write_text(material, encoding='utf-8')
+        (root/'task.md').write_text(material, encoding='utf-8', newline='\n')
         target = root/'answer.txt'
         def add(x: int, y: int) -> int:
             return x+y
