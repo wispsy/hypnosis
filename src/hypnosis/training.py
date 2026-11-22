@@ -95,25 +95,38 @@ class TrainingPaused(RuntimeError):
 
 
 class _Job:
-    def __init__(self,corpus,directory,config,recipe,parent_artifact,observer,stop):
+    def __init__(self,corpus,directory,config,recipe,parent_artifact,observer,stop,continue_artifact=None):
         from thoughtform.artifacts import load_artifact
         self.corpus,self.documents=load_corpus(corpus)
         self.directory=Path(directory);self.config=config;self.recipe=recipe
         self.parent_artifact=parent_artifact;self.observer=observer;self.stop=stop
-        self.started=time.monotonic();self.parent_sha256=None
-        if (config.model_id=='hero-coding')!=(parent_artifact is not None):
+        self.continue_artifact=continue_artifact;self.continuation=None;self.continuation_sha256=None
+        self.started=time.monotonic();self.parent_sha256=None;self.history_limited=False
+        if continue_artifact is not None:
+            if config.profile!='balanced-v2' or parent_artifact is not None:
+                raise ValueError('Continuation requires balanced-v2 and a distinct explicit continuation artifact')
+            self.continuation=load_artifact(continue_artifact)
+            if self.continuation.recipe.sha256!=recipe.sha256 or self.continuation.receipt['corpus_sha256']!=self.corpus['sha256']:
+                raise ValueError('Continuation must preserve selected corpus and model recipe')
+            self.continuation_sha256=self.continuation.receipt['checkpoint']['sha256']
+            self.parent_sha256=self.continuation.receipt['parent_sha256']
+            self.continuation_context=_read(Path(continue_artifact).parent/'context.json')
+        elif (config.model_id=='hero-coding')!=(parent_artifact is not None):
             raise ValueError('Hero Coding requires an explicitly selected Hero parent artifact')
         if parent_artifact is not None:
             parent=load_artifact(parent_artifact)
             if parent.recipe.model_id!=recipe.parent_model_id: raise ValueError('Parent identity differs from the recipe')
             self.parent_sha256=parent.receipt['checkpoint']['sha256']
-        self.config_sha256=_identity({'job':job_settings(config),'recipe':recipe.sha256,
-            'parent':self.parent_sha256,'corpus':self.corpus['sha256']})
+        binding_identity={'job':job_settings(config),'recipe':recipe.sha256,
+            'parent':self.parent_sha256,'corpus':self.corpus['sha256']}
+        if self.continuation_sha256 is not None: binding_identity['continuation']=self.continuation_sha256
+        self.config_sha256=_identity(binding_identity)
         self.identity=WorkflowIdentity(self.corpus['sha256'],recipe.sha256,self.config_sha256,
                                       _identity(self.corpus['sources']),
                                       profile='homegrown-v1' if config.profile=='pilot-v1' else 'homegrown-v2')
         self.binding={'schema':'hypnosis-job/1','identity':asdict(self.identity),'config':job_settings(config),
                       'recipe':asdict(recipe),'parent_sha256':self.parent_sha256}
+        if self.continuation_sha256 is not None: self.binding['continuation_sha256']=self.continuation_sha256
         if self.directory.exists():
             if _read(self.directory/'job.json')!=self.binding: raise ValueError('Destination belongs to a different job')
         else:
@@ -147,14 +160,23 @@ class _Job:
             if hasattr(self,'_prepared_selection'): return self._prepared_selection
             from .selection import prepare_selection
             parent_tokenizer=None
-            if self.parent_artifact is not None:
+            if self.continuation is not None: parent_tokenizer=self.continuation.tokenizer
+            elif self.parent_artifact is not None:
                 parent=load_artifact(self.parent_artifact)
                 if parent.receipt['checkpoint']['sha256']!=self.parent_sha256: raise ValueError('Selected parent changed')
                 parent_tokenizer=parent.tokenizer
             tokenizer,pairs,selection,self.window_sources=prepare_selection(self.training_documents(),self.config,tokenizer=parent_tokenizer)
-            numerical=TrainingConfig(max_steps=self.config.max_steps,block_size=self.config.block_size,
-                learning_rate=self.config.learning_rate,max_seconds=self.config.max_seconds,
+            initial=self.continuation.state if self.continuation is not None else None
+            numerical=TrainingConfig(max_steps=self.config.max_steps+(initial.step if initial else 0),block_size=self.config.block_size,
+                learning_rate=self.config.learning_rate,max_seconds=self.config.max_seconds+(initial.elapsed_seconds if initial else 0),
                 seed=self.config.seed,shuffle=self.config.shuffle)
+            if self.continuation is not None:
+                expected=self.checkpoint_context(selection)
+                for key in ('schema','profile','corpus_sha256','recipe_sha256','pairs_sha256','tokenizer_sha256','order'):
+                    if self.continuation_context.get(key)!=expected[key]: raise ValueError('Continuation data/order identity changed: '+key)
+                old=self.continuation.training_config
+                if any(getattr(old,key)!=getattr(numerical,key) for key in ('block_size','learning_rate','seed','shuffle','lora_only')):
+                    raise ValueError('Continuation must preserve its numerical optimizer policy')
             self._prepared_selection=(tokenizer,pairs,numerical,selection)
             return self._prepared_selection
         selected=self.training_documents();self.unknown_training=[]
@@ -189,6 +211,14 @@ class _Job:
             'documents_available':len(selected),'documents_unknown':len(self.unknown_training),
             'unknown_ids':self.unknown_training[:64],'pairs_sha256':_identity(pairs),
             'sequences':len(pairs),'tokenizer_sha256':_identity(tokenizer.to_dict())}
+
+    def checkpoint_context(self,selection):
+        return {'schema':'hypnosis-checkpoint-context/1','profile':self.config.profile,
+            'corpus_sha256':self.corpus['sha256'],'recipe_sha256':self.recipe.sha256,
+            'pairs_sha256':selection['pairs_sha256'],'tokenizer_sha256':selection['tokenizer_sha256'],
+            'order':{key:getattr(self.config,key) for key in ('block_size','learning_rate','seed','shuffle','max_sequences')},
+            'run_id':self.config.run_id,'config_sha256':self.config_sha256,
+            'continued_from_sha256':self.continuation_sha256}
 
     def prepare(self):
         _tokenizer,_pairs,_numerical,selection=self.setup()
@@ -226,11 +256,14 @@ class _Job:
             if loaded_config!=numerical or loaded_metadata!=metadata or loaded_tokenizer.to_dict()!=tokenizer.to_dict():
                 raise ValueError('Native resume identity differs from the selected job')
         else:
-            if self.parent_artifact is not None:
+            if self.continuation is not None:
+                model=self.continuation.model;state=self.continuation.state
+            elif self.parent_artifact is not None:
                 model,tokenizer,parent_sha=specialize(self.parent_artifact,self.recipe)
                 if parent_sha!=self.parent_sha256: raise ValueError('Parent artifact changed')
-            else: model=initialize(self.recipe,tokenizer,seed=self.config.seed)
-            state=TrainingState()
+                state=TrainingState()
+            else:
+                model=initialize(self.recipe,tokenizer,seed=self.config.seed);state=TrainingState()
         before_path=self.directory/'before.json'
         if not before_path.exists():
             before=self.metrics(model,tokenizer)
@@ -238,20 +271,26 @@ class _Job:
         def checkpoint(progress):
             if progress.step%self.config.checkpoint_interval==0:
                 save_training_checkpoint(latest,model,tokenizer,numerical,progress,metadata=metadata,overwrite=True)
+                if self.config.profile=='balanced-v2':
+                    from .checkpoints import retain_checkpoint
+                    self.history_limited=not retain_checkpoint(self,model,tokenizer,numerical,progress,metadata,selection)
         def observe(metric):
-            if metric.step%25==0 or metric.step==self.config.max_steps:
+            if metric.step%25==0 or metric.step==numerical.max_steps:
                 self.emit('step',**asdict(metric))
         expired=lambda:time.monotonic()-self.started>=self.config.max_seconds
         if not final.exists():
             result=fit(model,pairs,numerical,state=state,checkpoint=checkpoint,observer=observe,
-                       stop=lambda:(self.stop is not None and self.stop()) or expired())
+                       stop=lambda:(self.stop is not None and self.stop()) or expired() or self.history_limited)
             state=result.state
             save_training_checkpoint(latest,model,tokenizer,numerical,state,metadata=metadata,overwrite=True)
-            if result.status=='paused' and not expired():
+            if result.status=='paused' and not expired() and not self.history_limited:
+                if self.config.profile=='balanced-v2':
+                    from .checkpoints import retain_checkpoint
+                    retain_checkpoint(self,model,tokenizer,numerical,state,metadata,selection)
                 self.emit('paused',step=state.step)
                 raise TrainingPaused('Native state saved; retry this workflow explicitly to resume')
             save_training_checkpoint(final,model,tokenizer,numerical,state,metadata=metadata)
-        status='completed' if state.step>=self.config.max_steps else 'limited'
+        status='completed' if state.step>=numerical.max_steps else 'limited'
         artifact_path=self.directory/'artifact.json'
         if artifact_path.exists(): artifact=load_artifact(artifact_path).receipt
         else:
@@ -266,10 +305,20 @@ class _Job:
                  'checkpoint_sha256':artifact['checkpoint']['sha256'],
                  'inference_sha256':checkpoint_identity(inference)[0]}
         if self.config.profile=='balanced-v2':
+            from .checkpoints import retain_checkpoint
+            if latest.exists(): retain_checkpoint(self,model,tokenizer,numerical,state,metadata,selection)
+            context=self.checkpoint_context(selection)
+            context_path=self.directory/'context.json'
+            if context_path.exists() and _read(context_path)!=context: raise ValueError('Final checkpoint context changed')
+            if not context_path.exists(): _write(context_path,context)
             from .selection import consumed_windows
             consumed=consumed_windows(pairs,self.window_sources,state.step,shuffle=self.config.shuffle,seed=self.config.seed)
             if sum(consumed['tokens'].values())!=state.tokens: raise ValueError('Consumed-source token audit differs from native progress')
             summary['consumed_sources']=consumed
+            initial=self.continuation.state if self.continuation is not None else TrainingState()
+            summary.update(steps_this_job=state.step-initial.step,tokens_this_job=state.tokens-initial.tokens,
+                training_seconds_this_job=state.elapsed_seconds-initial.elapsed_seconds,
+                continued_from_sha256=self.continuation_sha256,history_limited=self.history_limited)
         _write(self.directory/'training.json',summary);self.emit('trained',step=state.step,status=status)
         return summary
 
@@ -308,10 +357,13 @@ class _Job:
             'before':_read(self.directory/'before.json'),**evaluated,'receipt_ids':ids,
             'wall_seconds_this_invocation':time.monotonic()-self.started}
         _write(self.directory/'result.json',report);self.emit('registered',status=trained['status'])
+        if self.config.profile=='balanced-v2':
+            from .checkpoints import index_run
+            index_run(self.directory,self.directory/'history.sqlite',self.directory)
         return {'status':trained['status'],'checkpoint_sha256':checkpoint,'receipt_ids':ids}
 
 
-def run_job(corpus,destination,config,*,parent_artifact=None,recipe=None,retry=False,observer=None,stop=None):
+def run_job(corpus,destination,config,*,parent_artifact=None,continue_artifact=None,recipe=None,retry=False,observer=None,stop=None):
     """Run/resume an explicit local job. Retry never means a fresh optimizer."""
     from thoughtform.recipes import HERO,HERO_CODING,ModelRecipe
     from func_seq import StepFailedError
@@ -322,7 +374,7 @@ def run_job(corpus,destination,config,*,parent_artifact=None,recipe=None,retry=F
             from thoughtform.recipes import recipe_for
             recipe=recipe_for(config.model_id,config.profile)
     if type(recipe) is not ModelRecipe or recipe.model_id!=config.model_id: raise ValueError('Recipe/model identity differs')
-    job=_Job(corpus,destination,config,recipe,parent_artifact,observer,stop)
+    job=_Job(corpus,destination,config,recipe,parent_artifact,observer,stop,continue_artifact)
     script=training_workflow(config.run_id,job.identity,prepare=job.prepare,train=job.train,
                              evaluate=job.evaluate,register=job.register)
     try:
@@ -335,17 +387,18 @@ def run_job(corpus,destination,config,*,parent_artifact=None,recipe=None,retry=F
     return _read(job.directory/'result.json')
 
 
-def benchmark_job(corpus,destination,*,steps=5):
+def benchmark_job(corpus,destination,*,steps=5,profile='pilot-v1'):
     """Measure a tiny fresh-model sample using the exact job preparation policy."""
-    from thoughtform.recipes import HERO,initialize
+    from thoughtform.recipes import HERO,initialize,recipe_for
     from thoughtformula import fit,parameter_count
     if type(steps) is not int or not 1<=steps<=10: raise ValueError('Benchmark at most ten steps')
-    job=_Job(corpus,destination,JobConfig('pilot-probe',max_steps=steps,max_seconds=20),
-             HERO,None,None,None)
+    recipe=recipe_for('hero',profile)
+    job=_Job(corpus,destination,JobConfig('pilot-probe',max_steps=steps,max_seconds=20,profile=profile),
+             recipe,None,None,None)
     tokenizer,pairs,config,selection=job.setup()
-    model=initialize(HERO,tokenizer,seed=config.seed)
+    model=initialize(recipe,tokenizer,seed=config.seed)
     result=fit(model,pairs,config)
     if result.state.step!=steps: raise ValueError('Benchmark did not complete within its bound')
     return {'steps':steps,'seconds':result.state.elapsed_seconds,
             'step_seconds':result.state.elapsed_seconds/steps,'parameters':parameter_count(model),
-            'vocabulary_size':len(tokenizer.vocab),'selection':selection,'recipe_sha256':HERO.sha256}
+            'vocabulary_size':len(tokenizer.vocab),'selection':selection,'recipe_sha256':recipe.sha256}
