@@ -100,3 +100,37 @@ async def job_progress(job):
             await asyncio.shield(future)
         finally:
             executor.shutdown(wait=True,cancel_futures=True)
+
+
+async def call_owned(function,*args,**kwargs):
+    """Call trusted async work or settle a synchronous call on the owned adapter."""
+    import inspect
+    if inspect.iscoroutinefunction(function) or inspect.iscoroutinefunction(getattr(function,'__call__',None)):
+        return await function(*args,**kwargs)
+    from contextlib import aclosing
+    async with aclosing(from_sync(lambda:iter((function(*args,**kwargs),)))) as source:
+        value=await anext(source)
+    return await value if inspect.isawaitable(value) else value
+
+
+async def bounded_call(factory,*,control,seconds):
+    """Return (status,value,error), settling owned work on cancel/deadline.
+
+    The factory must return cooperative/owned async work. Exception objects stay
+    private to the caller; receipts use structural codes. External cancellation
+    propagates after ownership settlement.
+    """
+    if control.canceled:return 'canceled',None,None
+    if seconds<=0:return 'limited',None,None
+    work=asyncio.create_task(factory());canceled=asyncio.create_task(control.wait())
+    try:
+        ready,_=await asyncio.wait((work,canceled),timeout=seconds,return_when=asyncio.FIRST_COMPLETED)
+        if canceled in ready or work not in ready:
+            work.cancel();await asyncio.gather(work,return_exceptions=True)
+            return ('canceled' if canceled in ready else 'limited'),None,None
+        try:return 'completed',work.result(),None
+        except Exception as error:return 'failed',None,error
+    except asyncio.CancelledError:
+        work.cancel();await asyncio.gather(work,return_exceptions=True);raise
+    finally:
+        canceled.cancel();await asyncio.gather(canceled,return_exceptions=True)
