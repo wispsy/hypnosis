@@ -34,20 +34,34 @@ def build_interface():
         return {'status':'completed','corpus':receipt}
 
     @app.command(name='train')
-    def train(corpus: str, destination: str, config: str, parent_artifact: str = '', retry: bool = False):
+    def train(corpus: str, destination: str, config: str, parent_artifact: str = '', continue_artifact: str = '', retry: bool = False):
         """Run or explicitly recover a bounded homegrown training job."""
         from .training import load_job,run_job
         def progress(value): print(json.dumps(value,allow_nan=False),file=sys.stderr,flush=True)
         return run_job(corpus,destination,load_job(config),parent_artifact=parent_artifact or None,
-                       retry=retry,observer=progress)
+                       continue_artifact=continue_artifact or None,retry=retry,observer=progress)
 
     @app.command(name='train-terminal')
-    async def train_terminal(corpus: str, destination: str, config: str, parent_artifact: str = '', retry: bool = False):
+    async def train_terminal(corpus: str, destination: str, config: str, parent_artifact: str = '', continue_artifact: str = '', retry: bool = False):
         """Run the same job with live Carets progress and cooperative cancellation."""
         from .training import load_job
         from .terminal import run_training_terminal
         return await run_training_terminal(corpus,destination,load_job(config),
-            parent_artifact=parent_artifact or None,retry=retry)
+            parent_artifact=parent_artifact or None,continue_artifact=continue_artifact or None,retry=retry)
+
+    @app.command(name='index-checkpoints')
+    def index_checkpoints(directory: str, database: str, root: str):
+        """Index a run's complete checkpoint sidecars into a local collection."""
+        from .checkpoints import index_run
+        return index_run(directory,database,root)
+
+    @app.command(name='checkpoints')
+    def checkpoints(database: str, root: str, model_id: str = '', profile: str = '', limit: int = 50, cursor: str = ''):
+        """List a bounded page of a local Hero checkpoint collection."""
+        from .checkpoints import CheckpointCollection
+        with CheckpointCollection(database,root) as collection:
+            return {'status':'completed',**collection.page(model_id=model_id or None,profile=profile or None,
+                                                         limit=limit,cursor=cursor or None)}
 
     return app
 
