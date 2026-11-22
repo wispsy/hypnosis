@@ -20,6 +20,11 @@ requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
 
 [project.optional-dependencies]
+context = [
+    "hidden-moves-workspace @ git+https://github.com/wispsy/hidden_moves.git@fe5d822c82d5aa6e503fd3981161f97da113cdf0#subdirectory=packages/hidden-moves-workspace",
+    "parse-md @ git+https://github.com/wispsy/parse_md.git@54ff935e4ef9218a5c6227eb4149b62a52f89ec1",
+]
+tools = ["hidden-moves @ git+https://github.com/wispsy/hidden_moves.git@fe5d822c82d5aa6e503fd3981161f97da113cdf0"]
 workflow = ["func-seq @ git+https://github.com/wispsy/func_seq.git@bfb4c1d5bccc73f842d72ddb7809a11973acb9e4"]
 records = ["backpack-store @ git+https://github.com/wispsy/backpack.git@77440f85a290a756e26c7180ccb2d092812f13b4"]
 data = [
@@ -42,4 +47,4 @@ Source = "https://github.com/wispsy/hypnosis"
 Project = "https://github.com/orgs/wispsy/projects/28"
 
 [tool.uv.build-backend]
-source-include = ["tests/**", "scripts/**", "experiments/**", "IMPLEMENTATION_PLAN.md"]
+source-include = ["docs/**", "tests/**", "scripts/**", "experiments/**", "IMPLEMENTATION_PLAN.md"]
