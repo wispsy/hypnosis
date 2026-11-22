@@ -8,7 +8,7 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
-    "carets @ git+https://github.com/wispsy/carets.git@b8c4c8048d59b36c4c006f3157f000e0e4bd4779",
+    "carets @ git+https://github.com/wispsy/carets.git@0bec123a70dde1b762dd89622dc1954c8bacb794",
     "expose-interface @ git+https://github.com/wispsy/expose_interface.git@8c71caefe67217bb6df87e280261746a3055fc86",
 ]
 
