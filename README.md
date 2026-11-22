@@ -162,3 +162,25 @@ frozen vocabulary. Actual consumed source windows/tokens and separate coding/
 general held-out measurements are reported. `pilot-v1` remains the default and
 retains its original config, tokenizer and window identities for old jobs and
 matched comparisons. Losses across different tokenizers are not directly comparable.
+
+Balanced-v2 jobs retain immutable `checkpoints/step-.../model.tft` snapshots and
+verified sidecars at the selected checkpoint interval. Latest recovery state is
+separate. A job keeps at most 128 history snapshots and 512 MiB of native history;
+reaching either ceiling saves a final limited result without deleting history.
+Typed Backpack collections retain model/profile/tokenizer/data/parent/continuation
+identities and support bounded pages:
+
+```sh
+hypnosis index-checkpoints .runs/my-run .runs/checkpoints.sqlite .runs
+hypnosis checkpoints .runs/checkpoints.sqlite .runs --model-id hero --profile balanced-v2
+hypnosis train .corpora/selected .runs/hero-next next.json \
+  --continue-artifact .runs/my-run/artifact.json
+```
+
+Continuation preserves full weights, Adam and numerical order from a balanced-v2
+checkpoint. It requires identical corpus, recipe, tokenizer, windows, learning
+rate and ordering policy. Its step/time settings are additional budgets in a new
+run directory; cumulative and per-job counters are both recorded. Specialization
+uses `--parent-artifact` instead and resets Adam. These operations cannot be
+combined. Every history/final context is passive data; no source code is loaded
+from it. Index refresh is idempotent and does not train or mutate checkpoint bytes.

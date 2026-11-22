@@ -7,7 +7,7 @@ import sys
 from .training import _read
 
 
-def collect_completed_job(directory,corpus,settings,*,parent_artifact=None,timeout=15):
+def collect_completed_job(directory,corpus,settings,*,parent_artifact=None,continue_artifact=None,timeout=15):
     """Recollect only a durably completed workflow, without retry authority.
 
     No optimizer stage may be repeated. The native checkpoint and persisted
@@ -29,6 +29,7 @@ def collect_completed_job(directory,corpus,settings,*,parent_artifact=None,timeo
         raise ValueError('Only completed workflows can be recollected')
     command=[sys.executable,'-u','-m','hypnosis','train',str(corpus),str(directory),str(settings)]
     if parent_artifact is not None: command+=['--parent-artifact',str(parent_artifact)]
+    if continue_artifact is not None: command+=['--continue-artifact',str(continue_artifact)]
     completed=subprocess.run(command,capture_output=True,text=True,timeout=timeout)
     if completed.returncode not in (0,1) or len(completed.stdout.encode())>1024*1024:
         raise ValueError('Completed job recollection failed')

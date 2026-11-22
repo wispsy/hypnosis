@@ -216,3 +216,11 @@ interleaving, complete selected-training alphabet coverage and actual consumed
 source audits. Separate coding/general held-out metrics make specialization
 regressions visible. Legacy job settings omit the new profile field to retain
 existing identity; the original completed pilot reopens without replay.
+
+HYP-CHECKPOINT-01 retains immutable periodic native snapshots and typed Backpack
+inventory under finite count/byte ceilings. Exact continuation from a retained
+balanced-v2 artifact preserves Adam and data/order identities in a new run with
+additional budgets; specialization remains distinct. Tests compare continued
+weights/moments bit-for-bit with uninterrupted training and reopen collection
+records in a fresh process. The selected thirty-minute Hero stage will use two
+fifteen-minute jobs so this continuation path is exercised in the real session.

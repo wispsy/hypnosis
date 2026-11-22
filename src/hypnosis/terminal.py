@@ -108,7 +108,7 @@ async def run_terminal(*, text='Hello from Hypnosis.', messages=None, input_stre
     return {'schema': 1, 'status': model.status, 'code': model.code}
 
 
-async def run_training_terminal(corpus,destination,config,*,parent_artifact=None,retry=False,
+async def run_training_terminal(corpus,destination,config,*,parent_artifact=None,continue_artifact=None,retry=False,
                                 messages=None,input_stream=None,output_stream=None):
     from .execution import job_progress
     from .runtime import RunLimits
@@ -116,7 +116,7 @@ async def run_training_terminal(corpus,destination,config,*,parent_artifact=None
     result={}
     def job(observer,stop):
         completed=run_job(corpus,destination,config,parent_artifact=parent_artifact,
-                          retry=retry,observer=observer,stop=stop)
+                          continue_artifact=continue_artifact,retry=retry,observer=observer,stop=stop)
         result.update(completed)
         return completed
     terminal=await run_terminal(factory=lambda:job_progress(job),run_id=config.run_id,
