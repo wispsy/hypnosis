@@ -76,11 +76,13 @@ class ToolExecutor:
     worker which is joined before returning, including after a deadline. A Python
     call cannot be forcibly killed; late/uncertain effects never authorize replay.
     """
-    def __init__(self,catalog,policy):
+    def __init__(self,catalog,policy,*,observer=None):
         if type(policy) is not ToolPolicy:raise TypeError('Use ToolPolicy')
         selected={d.name for d in catalog.definitions()}
         if not set(policy.allowed)<=selected:raise ValueError('Authority exceeds the selected catalog')
+        if observer is not None and not callable(observer):raise TypeError('Tool observer must be callable')
         self.catalog,self.policy=catalog,policy;self.calls=0;self._started=None;self.last_receipt=None
+        self.observer=observer;self.output_bytes=0;self.uncertain_effects=False
 
     async def invoke(self,request,*,control=None):
         from hidden_moves.adapters.errors import CapabilityArgumentError,CapabilityResultError
@@ -91,7 +93,10 @@ class ToolExecutor:
         def outcome(status,code='',effect='not_started',**values):
             value=ToolOutcome(request.id,request.name,status,code,effect,input_sha,
                               elapsed_seconds=time.monotonic()-started,**values)
-            self.last_receipt=value.receipt();return value
+            self.last_receipt=value.receipt()
+            self.uncertain_effects |= effect=='uncertain'
+            if self.observer is not None:self.observer(dict(self.last_receipt))
+            return value
         if request.name not in self.policy.allowed:return outcome('denied','unselected')
         if control.canceled:return outcome('canceled')
         if len(request.arguments_json.encode())>self.policy.max_input_bytes:return outcome('limited','input_budget')
@@ -119,7 +124,8 @@ class ToolExecutor:
             except Exception:return outcome('failed','call_error','uncertain')
             try:raw=json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode()
             except (ValueError,TypeError,UnicodeError):return outcome('failed','result','uncertain')
-            if len(raw)>self.policy.max_output_bytes:return outcome('limited','output_budget','completed',output_bytes=len(raw))
+            if self.output_bytes+len(raw)>self.policy.max_output_bytes:return outcome('limited','output_budget','completed',output_bytes=len(raw))
+            self.output_bytes+=len(raw)
             return outcome('completed',effect='completed',output_sha256=hashlib.sha256(raw).hexdigest(),output_bytes=len(raw),value=value)
         except asyncio.CancelledError:
             operation.cancel();await asyncio.gather(operation,return_exceptions=True)

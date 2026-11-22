@@ -43,7 +43,8 @@ class HarnessLedger:
 
     def record_report(self, run_id, report):
         from .optimization import Promotion, TrialReport
-        kinds = {TrialReport: 'trial', Promotion: 'promotion'}
+        from .application import ApplicationReport
+        kinds = {TrialReport: 'trial', Promotion: 'promotion', ApplicationReport: 'application'}
         if type(report) not in kinds:
             raise TypeError('Use a typed structural report')
         summary = report.receipt()

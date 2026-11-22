@@ -36,11 +36,40 @@ configured Thoughtform `ThoughtformulaModel` using the same mechanism. Install
 still supply compatible model/tokenizer instances and serialize shared model
 access. No model/data download, training or inference starts on import.
 
-Tools will reuse Hidden Moves catalogs; persistent workflows use Moveset,
-func_seq and Scriptty; records use Backpack; HTTP providers use Requ/Apiconn;
-training algorithms stay in Thoughtformula. The current offline vertical slice
-does not yet implement autonomous tools, Ollama, persistent jobs, model training
-or adaptive search. Their acceptance criteria are in the owning issues.
+Selected tools use Hidden Moves catalogs; context uses Workspace and Parse MD;
+durable jobs use func_seq; records use Backpack; training stays in Thoughtformula.
+Measured harness trials use actual verifier outcomes and a heldout regression
+gate with explicit promotion. Ollama remains deferred. Importing the package
+never activates providers, trains weights or downloads data.
+
+## Harness workbench
+
+```sh
+uv sync --extra application
+uv run hypnosis application-demo
+uv run hypnosis app
+uv run hypnosis stream --text 'Incremental process output.'
+```
+
+The application profile composes Carets 0.2.0's shared shell and typed snapshot
+tables. The offline workflow retrieves a selected scratch document, calls an
+explicit tool, verifies and repairs a saved artifact, and compares configurations
+on validation/heldout cases. These are real service integrations using a small
+deterministic exercise; they do not claim general autonomous problem solving.
+`app` presents jobs, tools, context references, verification attempts, trials,
+checkpoint metadata and private local output. Use 1–7 to change section, Tab to
+change focus, arrows to navigate, c to cancel and q to quit. Press p to review a
+promotion; the dialog defaults to Cancel and requires selecting Confirm.
+
+Select `--database PATH` to retain structural receipts. Select both
+`--checkpoint-database PATH --checkpoint-root PATH` to browse an existing
+checkpoint collection read-only. With `--extra models` as well, `--artifact PATH`
+loads an explicitly selected local Hero/Hero Coding sidecar for a bounded native
+syntax probe. No generated Python is executed and syntax is not a functional
+correctness test. No model weights change. See [application composition](docs/application.md),
+[tools](docs/tools.md), [context](docs/context.md), [verification](docs/verification.md),
+[trials](docs/optimization.md), [jobs](docs/orchestration.md) and
+[process streams](docs/process-streams.md).
 
 Verify with `PYTHONPATH=src python -m unittest discover -s tests`. CI builds and
 checks wheel/source installations outside the checkout on Linux, macOS and
@@ -58,10 +87,11 @@ bounded corpus preparation with source snapshots, grouped held-out splits,
 deduplication, citation markers and reproducible corpus receipts. It never
 extracts the full Wikipedia dump or fetches reference URLs.
 
-Source IDs are admitted by the reviewed pilot catalog in
-[source review #13](https://github.com/wispsy/hypnosis/issues/13). The internally
-generated v1 pilot recipe is selected; the Python vault, Python docs/wiki and
-other future sources require their own reviewed snapshots/recipes. Fingerprints
+Source IDs are admitted by explicit reviewed catalogs. The internally generated
+v1 pilot remains reproducible under [source review #13](https://github.com/wispsy/hypnosis/issues/13).
+The later approved Python vault/tutorials, docs and wiki snapshots are tracked
+under [source review #27](https://github.com/wispsy/hypnosis/issues/27); future
+sources and recipe changes retain their own review. Fingerprints
 are labeled stat-plus-head/tail samples, not full-dump checksum verification.
 Exact selected corpus/block hashes retain reproducibility. Keep corpus outputs
 in caller-owned ignored local artifact directories.

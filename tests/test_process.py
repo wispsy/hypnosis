@@ -36,7 +36,7 @@ class ProcessTests(unittest.IsolatedAsyncioTestCase):
                 signal.touch()
                 self.assertEqual([event['kind'] async for event in events], ['completed'])
             self.assertEqual((run.outcome.status, run.outcome.returncode), ('completed', 0))
-        encoded = (record('started', 0)+record('delta', 1, text='é\n界')+record('completed', 2)).encode()
+        encoded = (record('started', 0)+record('delta', 1, text='é\n界')+record('completed', 2)).replace('\\u00e9', 'é').replace('\\u754c', '界').encode('utf-8')
         decoder = RunEventDecoder()
         decoded = []
         for byte in encoded:

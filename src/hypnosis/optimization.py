@@ -25,7 +25,7 @@ class HarnessConfig:
         for tool in self.tools:
             if type(tool) is not str or not tool or len(tool) > 256:
                 raise ValueError('Invalid capability name')
-        for value, low, high in ((self.context_bytes, 0, 1048576), (self.repair_attempts, 1, 32), (self.workflow_units, 1, 1000000)):
+        for value, low, high in ((self.context_bytes, 64, 1048576), (self.repair_attempts, 1, 32), (self.workflow_units, 1, 1000000)):
             if type(value) is not int or not low <= value <= high:
                 raise ValueError('Invalid harness configuration')
 
