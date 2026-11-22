@@ -1,0 +1,1993 @@
+{
+  "budget_seconds": 3600,
+  "collection": {
+    "by_model_profile": {
+      "hero-coding/balanced-v2": 11,
+      "hero-coding/pilot-v1": 1,
+      "hero/balanced-v2": 20,
+      "hero/pilot-v1": 2
+    },
+    "checkpoints": [
+      {
+        "checkpoint_sha256": "5de400dce580bd2db2cc6c8dbd02e353b3ba7acd12617ea10cd0ccc2017e5315",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 2000,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 59064
+      },
+      {
+        "checkpoint_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 4228,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 126598
+      },
+      {
+        "checkpoint_sha256": "46c7db5bb5892ebc7b4e3e6d9f49a2bf3f18c637df721b29f26898d1d4ab877d",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 1750,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 51527
+      },
+      {
+        "checkpoint_sha256": "7f4c26c1e7d21a7dee3382ee317425b34ffaa3bf6d2a692dae00230ff667fe16",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 3250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 96850
+      },
+      {
+        "checkpoint_sha256": "e0ceccc030aad5c033ff8e21ee4ba6a0d9de8af5e8a07250fdb71e98a3465d87",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 3500,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 104488
+      },
+      {
+        "checkpoint_sha256": "aca2cc216a86b8be45e8a2f7473ed2cca5f67f0689ba3f1693f3f27f30df6364",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 2750,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 81638
+      },
+      {
+        "checkpoint_sha256": "f3bcda82c252fbafebf5adda50474204aa404f80c6ce207552c41562e12bfe4c",
+        "config_sha256": "e008d93c9fb073be224c7a6f0d2fca0d7572d2c90bf309002dcc53a3438dfbe3",
+        "continued_from_sha256": null,
+        "corpus_sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "pilot-v1",
+        "recipe_sha256": "11523f5bf0b1f08fa6e14ca178ca5c3936ee2728682cd419572160b58fe92877",
+        "steps": 1478,
+        "tokenizer_sha256": "64ca830ea9da36788cce54b5dbb3051076c6b5b4ef011e78f27574a5d1e9831c",
+        "tokens": 44662
+      },
+      {
+        "checkpoint_sha256": "8b9a530c4c49019cd9d125782669259aeb73394e2303e4be333615f5573110e1",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 1500,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 44131
+      },
+      {
+        "checkpoint_sha256": "0cdde75ccf63e8a5bbbaeabd192a615772f0b38856ddf7aefa7b6f7cee30a900",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 500,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 14575
+      },
+      {
+        "checkpoint_sha256": "7b557bf443c1f06845163692fb21df4efe5b01b83a9218e3099360be249e09c2",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 750,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 22891
+      },
+      {
+        "checkpoint_sha256": "5176921eea895591371b9ceb444df3d2609db4238bec0b40c1378bb4955dfc4f",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 2474,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 76133
+      },
+      {
+        "checkpoint_sha256": "9a91bb89b85c334b64840c9fc86b2dca75ee79f3914be30d88d29f94c44b217c",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 3000,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 89287
+      },
+      {
+        "checkpoint_sha256": "fdf58c4ffdad5e9b3c6bb07ab878cd5209b37ad9ec8b7734b14d615eee034556",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 1250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 36933
+      },
+      {
+        "checkpoint_sha256": "65e57ccd888c8c33dcd1c6fad327e09584f1d566e60ad3ef71698aff08622a0d",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 1500,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 46073
+      },
+      {
+        "checkpoint_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 4228,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 126598
+      },
+      {
+        "checkpoint_sha256": "5feb2bec7d18832cfdcf018211494a26c9a16f477ab3106bfbd78315a7e80a5b",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 750,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 21998
+      },
+      {
+        "checkpoint_sha256": "5176921eea895591371b9ceb444df3d2609db4238bec0b40c1378bb4955dfc4f",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 2474,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 76133
+      },
+      {
+        "checkpoint_sha256": "d023f946c1d772eaf2fd428480f70a7d4cfb98b323e141e2af998ba1b2d42157",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 4000,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 119552
+      },
+      {
+        "checkpoint_sha256": "0e3dd1bf91c683fd2c4c941839d3da79d16c110e5676483b927109bca5888d44",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 1750,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 53795
+      },
+      {
+        "checkpoint_sha256": "9f2c024c9927f39abb239d56987261021799abc02c25a35177e3061f9922bf7b",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 2250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 66564
+      },
+      {
+        "checkpoint_sha256": "51843408e068d01b4a3ebbf16f4b18e0204c5f42f6975270195fb34911157f71",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 500,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 15398
+      },
+      {
+        "checkpoint_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 2123,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 62765
+      },
+      {
+        "checkpoint_sha256": "661b89839c2d8f8073cc309e5ea76e9f9217998705e19472d2bc5b1f7339ab63",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 2500,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 74079
+      },
+      {
+        "checkpoint_sha256": "f2fbfe789994cf26272348612aa9c84d28d94882c1fd6c5355cda50dad243f12",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 2250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 69218
+      },
+      {
+        "checkpoint_sha256": "db2e8a334965883e8ca9365f2f0bae35e356f12fe7b9b2724e1c0c5399f39b88",
+        "config_sha256": "8a73053a9c3504ef26e723d6b616c715cbda4209f156663b7c82e2ac40de7339",
+        "continued_from_sha256": null,
+        "corpus_sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "pilot-v1",
+        "recipe_sha256": "11523f5bf0b1f08fa6e14ca178ca5c3936ee2728682cd419572160b58fe92877",
+        "steps": 1478,
+        "tokenizer_sha256": "64ca830ea9da36788cce54b5dbb3051076c6b5b4ef011e78f27574a5d1e9831c",
+        "tokens": 45233
+      },
+      {
+        "checkpoint_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 2123,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 62765
+      },
+      {
+        "checkpoint_sha256": "9cb7012d2c2020eb5d513ac309927f721c0bd29a9e6fdd918425c11c626015cb",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 1000,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 30746
+      },
+      {
+        "checkpoint_sha256": "0d94dab480208f22b104993b04e2bfea8c975f19c41de03d97b03e9da66c5fc3",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 1250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 38441
+      },
+      {
+        "checkpoint_sha256": "78447fd70d9b58d4ff6aa188856b723aa219d74f3e06f7ee1fc9db49a024674a",
+        "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 3750,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 111817
+      },
+      {
+        "checkpoint_sha256": "9927c025dfcea7d049aecc8dc421e86936d903bf819cf6e78314e245ba5b9f9d",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 2000,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 61496
+      },
+      {
+        "checkpoint_sha256": "5f93f9ebb25eb655bc34e804101cdb8a2efa59cef7059f15b7bcce95af8c534a",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 1000,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 29508
+      },
+      {
+        "checkpoint_sha256": "df556222d534f89a65e3e50a8848643462322b425eaae362c2474a1260ef9fe6",
+        "config_sha256": "3bee6a8a286b1dd5998bf195028891aa82dfad61cf3f79a6fc019fa34e9b0f3c",
+        "continued_from_sha256": null,
+        "corpus_sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+        "model_id": "hero-coding",
+        "parent_sha256": "f3bcda82c252fbafebf5adda50474204aa404f80c6ce207552c41562e12bfe4c",
+        "profile": "pilot-v1",
+        "recipe_sha256": "bee7bef5557b003653294eea6fb9663efcb9558469e46b64103ba2e7d14bd411",
+        "steps": 500,
+        "tokenizer_sha256": "64ca830ea9da36788cce54b5dbb3051076c6b5b4ef011e78f27574a5d1e9831c",
+        "tokens": 14320
+      },
+      {
+        "checkpoint_sha256": "89082b5eb6cd74fb4f2cc64c1f87c30d919a281bd61be2af1aa23628cf2cb8df",
+        "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero-coding",
+        "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "profile": "balanced-v2",
+        "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+        "steps": 250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 7736
+      },
+      {
+        "checkpoint_sha256": "db56fcd460081dd839e92947a7f3a36ed0e4564fae3c3bb94e2c77d2c993e72d",
+        "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+        "continued_from_sha256": null,
+        "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+        "model_id": "hero",
+        "parent_sha256": null,
+        "profile": "balanced-v2",
+        "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+        "steps": 250,
+        "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079",
+        "tokens": 7224
+      }
+    ],
+    "has_more": false,
+    "records_in_page": 34,
+    "unique_native_checkpoints": 31
+  },
+  "corpus": {
+    "bytes": 8994130,
+    "documents": 4716,
+    "splits": {
+      "test": 753,
+      "train": 2765,
+      "validation": 1198
+    }
+  },
+  "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+  "elapsed_seconds": 3521.7326221250114,
+  "execution_issue": "https://github.com/wispsy/hypnosis/issues/34",
+  "finished_utc": "2026-11-22T03:28:27.728967+00:00",
+  "fixture_smoke": false,
+  "limitations": [
+    "single seed and bounded text windows",
+    "training and held-out denominators differ",
+    "tokenizer families are not directly compared",
+    "held-out loss is not factual accuracy",
+    "syntax is parsed without execution and does not establish working code",
+    "no autonomous training-agent qualification or automatic promotion",
+    "native artifact weights, raw text, vocabulary and private inventories remain local"
+  ],
+  "matched_pilot": {
+    "matched": true,
+    "original_checkpoint_sha256": "f3bcda82c252fbafebf5adda50474204aa404f80c6ce207552c41562e12bfe4c",
+    "original_heldout": {
+      "test": {
+        "coverage": 0.9803921568627451,
+        "documents_available": 153,
+        "documents_representable": 150,
+        "documents_selected": 16,
+        "documents_unknown": 3,
+        "loss": 4.372842560748563,
+        "perplexity": 79.26863766951982,
+        "selected_sources": {
+          "internal-v1": 8,
+          "simplewiki": 3,
+          "ud-test": 3,
+          "wiktionary": 2
+        },
+        "sequence_limit": 16,
+        "sequences": 16,
+        "status": "measured",
+        "tokens": 448
+      },
+      "validation": {
+        "coverage": 0.9893617021276596,
+        "documents_available": 282,
+        "documents_representable": 279,
+        "documents_selected": 16,
+        "documents_unknown": 3,
+        "loss": 4.170537078287551,
+        "perplexity": 64.75021870695615,
+        "selected_sources": {
+          "internal-v1": 9,
+          "simplewiki": 2,
+          "tinystories-valid": 2,
+          "ud-dev": 2,
+          "wiktionary": 1
+        },
+        "sequence_limit": 16,
+        "sequences": 16,
+        "status": "measured",
+        "tokens": 451
+      }
+    },
+    "shuffled_heldout": {
+      "test": {
+        "coverage": 0.9803921568627451,
+        "documents_available": 153,
+        "documents_representable": 150,
+        "documents_selected": 16,
+        "documents_unknown": 3,
+        "loss": 2.603260032057165,
+        "perplexity": 13.507701875433048,
+        "selected_sources": {
+          "internal-v1": 8,
+          "simplewiki": 3,
+          "ud-test": 3,
+          "wiktionary": 2
+        },
+        "sequence_limit": 16,
+        "sequences": 16,
+        "status": "measured",
+        "tokens": 448
+      },
+      "validation": {
+        "coverage": 0.9893617021276596,
+        "documents_available": 282,
+        "documents_representable": 279,
+        "documents_selected": 16,
+        "documents_unknown": 3,
+        "loss": 2.3203193678154994,
+        "perplexity": 10.178924607940976,
+        "selected_sources": {
+          "internal-v1": 9,
+          "simplewiki": 2,
+          "tinystories-valid": 2,
+          "ud-dev": 2,
+          "wiktionary": 1
+        },
+        "sequence_limit": 16,
+        "sequences": 16,
+        "status": "measured",
+        "tokens": 451
+      }
+    }
+  },
+  "probe": {
+    "parameters": 240355,
+    "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+    "seconds": 0.9512431669863872,
+    "step_seconds": 0.3170810556621291,
+    "steps": 3,
+    "vocabulary_size": 837
+  },
+  "recovery": {
+    "completed_training_stages_replayed": false,
+    "original_deadline_preserved": true,
+    "probe_retry": {
+      "returncode": 0,
+      "seconds": 15.911371000023792,
+      "stderr_bytes": 0,
+      "stdout_bytes": 13312
+    },
+    "reason": "initial probe produced empty stdout; inspected bounded retry succeeded",
+    "root_cause": "not established"
+  },
+  "runs": {
+    "hero-coding": {
+      "before": {
+        "coding_heldout": {
+          "test": {
+            "coverage": 0.9947916666666666,
+            "documents_available": 192,
+            "documents_representable": 191,
+            "documents_selected": 16,
+            "documents_unknown": 1,
+            "loss": 2.2210303418453936,
+            "perplexity": 9.21682245310781,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 456
+          },
+          "validation": {
+            "coverage": 0.9754098360655737,
+            "documents_available": 122,
+            "documents_representable": 119,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 2.2821651110526684,
+            "perplexity": 9.797870939989926,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 468
+          }
+        },
+        "general_heldout": {
+          "test": {
+            "coverage": 0.9893048128342246,
+            "documents_available": 561,
+            "documents_representable": 555,
+            "documents_selected": 16,
+            "documents_unknown": 6,
+            "loss": 2.713293532556959,
+            "perplexity": 15.078856526610764,
+            "selected_sources": {
+              "internal-v1": 7,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 3
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 354
+          },
+          "validation": {
+            "coverage": 0.9962825278810409,
+            "documents_available": 1076,
+            "documents_representable": 1072,
+            "documents_selected": 16,
+            "documents_unknown": 4,
+            "loss": 2.6452153706854724,
+            "perplexity": 14.086478570996233,
+            "selected_sources": {
+              "internal-v1": 5,
+              "simplewiki": 3,
+              "tinystories-valid": 3,
+              "ud-dev": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 432
+          }
+        },
+        "heldout": {
+          "test": {
+            "coverage": 0.9907038512616202,
+            "documents_available": 753,
+            "documents_representable": 746,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.3576139585469167,
+            "perplexity": 10.565711127446372,
+            "selected_sources": {
+              "internal-v1": 9,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "ud-test": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 398
+          },
+          "validation": {
+            "coverage": 0.9941569282136895,
+            "documents_available": 1198,
+            "documents_representable": 1191,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.3965828613110935,
+            "perplexity": 10.985572942828526,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "tinystories-valid": 1,
+              "ud-dev": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 450
+          }
+        }
+      },
+      "config_sha256": "57ccbe9f91b834fc7ea6c33b586150d8cd0603c36a5045c419d214fb97f5903e",
+      "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+      "evaluation": {
+        "coding_heldout": {
+          "test": {
+            "coverage": 0.9947916666666666,
+            "documents_available": 192,
+            "documents_representable": 191,
+            "documents_selected": 16,
+            "documents_unknown": 1,
+            "loss": 1.6907620071464786,
+            "perplexity": 5.423611961982439,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 456
+          },
+          "validation": {
+            "coverage": 0.9754098360655737,
+            "documents_available": 122,
+            "documents_representable": 119,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 1.8118527287997066,
+            "perplexity": 6.121778928020316,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 468
+          }
+        },
+        "general_heldout": {
+          "test": {
+            "coverage": 0.9893048128342246,
+            "documents_available": 561,
+            "documents_representable": 555,
+            "documents_selected": 16,
+            "documents_unknown": 6,
+            "loss": 3.067451156540485,
+            "perplexity": 21.487065652444734,
+            "selected_sources": {
+              "internal-v1": 7,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 3
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 354
+          },
+          "validation": {
+            "coverage": 0.9962825278810409,
+            "documents_available": 1076,
+            "documents_representable": 1072,
+            "documents_selected": 16,
+            "documents_unknown": 4,
+            "loss": 3.005640248595352,
+            "perplexity": 20.19914443072079,
+            "selected_sources": {
+              "internal-v1": 5,
+              "simplewiki": 3,
+              "tinystories-valid": 3,
+              "ud-dev": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 432
+          }
+        },
+        "heldout": {
+          "test": {
+            "coverage": 0.9907038512616202,
+            "documents_available": 753,
+            "documents_representable": 746,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.0611472761655905,
+            "perplexity": 7.854976470052879,
+            "selected_sources": {
+              "internal-v1": 9,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "ud-test": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 398
+          },
+          "validation": {
+            "coverage": 0.9941569282136895,
+            "documents_available": 1198,
+            "documents_representable": 1191,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.357465635088497,
+            "perplexity": 10.56414410084756,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "tinystories-valid": 1,
+              "ud-dev": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 450
+          }
+        },
+        "syntax": {
+          "attempted": 1,
+          "failed": 0,
+          "nonempty": 1,
+          "parsed": 0
+        }
+      },
+      "job": {
+        "block_size": 32,
+        "checkpoint_interval": 250,
+        "evaluation_sequences": 16,
+        "learning_rate": 0.00075,
+        "max_seconds": 1080,
+        "max_sequences": 8192,
+        "max_steps": 100000,
+        "model_id": "hero-coding",
+        "profile": "balanced-v2",
+        "run_id": "hero-coding-v2",
+        "seed": 7,
+        "shuffle": false
+      },
+      "model_id": "hero-coding",
+      "parent_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+      "recipe_sha256": "46bee9589ee9d74550be9690b3e8e2f465b83c06b1e5fbf8b9a213fe10bc6869",
+      "run_id": "hero-coding-v2",
+      "schema": "hypnosis-training-result/1",
+      "status": "limited",
+      "training": {
+        "checkpoint_sha256": "5176921eea895591371b9ceb444df3d2609db4238bec0b40c1378bb4955dfc4f",
+        "consumed_sources": {
+          "tokens": {
+            "internal-v1": 14202,
+            "psf-wiki-python": 3817,
+            "python-vault-reference": 7371,
+            "python-vault-tutorials": 23335,
+            "python314-docs": 27408
+          },
+          "windows": {
+            "internal-v1": 495,
+            "psf-wiki-python": 124,
+            "python-vault-reference": 248,
+            "python-vault-tutorials": 742,
+            "python314-docs": 865
+          }
+        },
+        "consumed_sources_scope": "cumulative native optimizer trajectory",
+        "continued_from_sha256": null,
+        "elapsed_seconds": 1058.8652283330157,
+        "history_limited": false,
+        "inference_sha256": "cfd1001bc0f6c9033ca0269f5553bef668cc6b4b94d0298fbb4d874a27dbacdd",
+        "parameters": 240355,
+        "selection": {
+          "documents_available": 1194,
+          "documents_selected": 1194,
+          "documents_unknown": 0,
+          "pairs_sha256": "d8749b49eb401b34f2643f28a7088e886caac2af7b333064d2927e4faf22a0dd",
+          "profile": "balanced-v2",
+          "selected_ids_sha256": "dda146b0a4d06cc601c3fa7d4a71eeb6e3cf5dffd73e9fb56891855c18b5a2fb",
+          "sequences": 8192,
+          "sources": {
+            "internal-v1": {
+              "documents_available": 158,
+              "documents_representable": 158,
+              "documents_unknown": 0,
+              "unique_windows": 631,
+              "weight": 20,
+              "windows": 1638
+            },
+            "psf-wiki-python": {
+              "documents_available": 185,
+              "documents_representable": 185,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "python-vault-reference": {
+              "documents_available": 413,
+              "documents_representable": 413,
+              "documents_unknown": 0,
+              "unique_windows": 820,
+              "weight": 10,
+              "windows": 820
+            },
+            "python-vault-tutorials": {
+              "documents_available": 41,
+              "documents_representable": 41,
+              "documents_unknown": 0,
+              "unique_windows": 1517,
+              "weight": 30,
+              "windows": 2457
+            },
+            "python314-docs": {
+              "documents_available": 397,
+              "documents_representable": 397,
+              "documents_unknown": 0,
+              "unique_windows": 2867,
+              "weight": 35,
+              "windows": 2867
+            }
+          },
+          "tokenizer_fit_characters": 0,
+          "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079"
+        },
+        "status": "limited",
+        "step": 2474,
+        "steps_this_job": 2474,
+        "tokens": 76133,
+        "tokens_this_job": 76133,
+        "training_seconds_this_job": 1058.8652283330157
+      },
+      "wall_seconds_this_invocation": 1097.114151457994
+    },
+    "hero-continued": {
+      "before": {
+        "coding_heldout": {
+          "test": {
+            "coverage": 0.9947916666666666,
+            "documents_available": 192,
+            "documents_representable": 191,
+            "documents_selected": 16,
+            "documents_unknown": 1,
+            "loss": 2.4306917204271405,
+            "perplexity": 11.36674196887512,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 456
+          },
+          "validation": {
+            "coverage": 0.9754098360655737,
+            "documents_available": 122,
+            "documents_representable": 119,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 2.5719779537743066,
+            "perplexity": 13.091693613281475,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 468
+          }
+        },
+        "general_heldout": {
+          "test": {
+            "coverage": 0.9893048128342246,
+            "documents_available": 561,
+            "documents_representable": 555,
+            "documents_selected": 16,
+            "documents_unknown": 6,
+            "loss": 3.0038226671643224,
+            "perplexity": 20.162464185645074,
+            "selected_sources": {
+              "internal-v1": 7,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 3
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 354
+          },
+          "validation": {
+            "coverage": 0.9962825278810409,
+            "documents_available": 1076,
+            "documents_representable": 1072,
+            "documents_selected": 16,
+            "documents_unknown": 4,
+            "loss": 3.014538680476483,
+            "perplexity": 20.379687224057353,
+            "selected_sources": {
+              "internal-v1": 5,
+              "simplewiki": 3,
+              "tinystories-valid": 3,
+              "ud-dev": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 432
+          }
+        },
+        "heldout": {
+          "test": {
+            "coverage": 0.9907038512616202,
+            "documents_available": 753,
+            "documents_representable": 746,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.5569626817127915,
+            "perplexity": 12.896586729098898,
+            "selected_sources": {
+              "internal-v1": 9,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "ud-test": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 398
+          },
+          "validation": {
+            "coverage": 0.9941569282136895,
+            "documents_available": 1198,
+            "documents_representable": 1191,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.5468622138273225,
+            "perplexity": 12.76698081107437,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "tinystories-valid": 1,
+              "ud-dev": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 450
+          }
+        }
+      },
+      "config_sha256": "e51603aedc13c61c93784cabea0f3e5f01ff8cc004a4a29b9e1d2d25f5112bc3",
+      "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+      "evaluation": {
+        "coding_heldout": {
+          "test": {
+            "coverage": 0.9947916666666666,
+            "documents_available": 192,
+            "documents_representable": 191,
+            "documents_selected": 16,
+            "documents_unknown": 1,
+            "loss": 2.2210303418453936,
+            "perplexity": 9.21682245310781,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 456
+          },
+          "validation": {
+            "coverage": 0.9754098360655737,
+            "documents_available": 122,
+            "documents_representable": 119,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 2.2821651110526684,
+            "perplexity": 9.797870939989926,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 468
+          }
+        },
+        "general_heldout": {
+          "test": {
+            "coverage": 0.9893048128342246,
+            "documents_available": 561,
+            "documents_representable": 555,
+            "documents_selected": 16,
+            "documents_unknown": 6,
+            "loss": 2.713293532556959,
+            "perplexity": 15.078856526610764,
+            "selected_sources": {
+              "internal-v1": 7,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 3
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 354
+          },
+          "validation": {
+            "coverage": 0.9962825278810409,
+            "documents_available": 1076,
+            "documents_representable": 1072,
+            "documents_selected": 16,
+            "documents_unknown": 4,
+            "loss": 2.6452153706854724,
+            "perplexity": 14.086478570996233,
+            "selected_sources": {
+              "internal-v1": 5,
+              "simplewiki": 3,
+              "tinystories-valid": 3,
+              "ud-dev": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 432
+          }
+        },
+        "heldout": {
+          "test": {
+            "coverage": 0.9907038512616202,
+            "documents_available": 753,
+            "documents_representable": 746,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.3576139585469167,
+            "perplexity": 10.565711127446372,
+            "selected_sources": {
+              "internal-v1": 9,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "ud-test": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 398
+          },
+          "validation": {
+            "coverage": 0.9941569282136895,
+            "documents_available": 1198,
+            "documents_representable": 1191,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.3965828613110935,
+            "perplexity": 10.985572942828526,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "tinystories-valid": 1,
+              "ud-dev": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 450
+          }
+        },
+        "syntax": {
+          "attempted": 1,
+          "failed": 0,
+          "nonempty": 1,
+          "parsed": 0
+        }
+      },
+      "job": {
+        "block_size": 32,
+        "checkpoint_interval": 250,
+        "evaluation_sequences": 16,
+        "learning_rate": 0.0015,
+        "max_seconds": 900,
+        "max_sequences": 8192,
+        "max_steps": 100000,
+        "model_id": "hero",
+        "profile": "balanced-v2",
+        "run_id": "hero-continued-v2",
+        "seed": 7,
+        "shuffle": false
+      },
+      "model_id": "hero",
+      "parent_sha256": null,
+      "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+      "run_id": "hero-continued-v2",
+      "schema": "hypnosis-training-result/1",
+      "status": "limited",
+      "training": {
+        "checkpoint_sha256": "a74bea7efd0c024e84afa83ba88bf6b149a2d2a2b4f1d34df38f05f2cf30ff23",
+        "consumed_sources": {
+          "tokens": {
+            "internal-v1": 22737,
+            "psf-wiki-python": 6437,
+            "python-vault-reference": 6257,
+            "python-vault-tutorials": 26547,
+            "python314-docs": 13406,
+            "simplewiki": 13315,
+            "tinystories-train": 26456,
+            "ud-train": 5551,
+            "wiktionary": 5892
+          },
+          "windows": {
+            "internal-v1": 845,
+            "psf-wiki-python": 212,
+            "python-vault-reference": 212,
+            "python-vault-tutorials": 845,
+            "python314-docs": 423,
+            "simplewiki": 423,
+            "tinystories-train": 845,
+            "ud-train": 212,
+            "wiktionary": 211
+          }
+        },
+        "consumed_sources_scope": "cumulative native optimizer trajectory",
+        "continued_from_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "elapsed_seconds": 1741.4663755410293,
+        "history_limited": false,
+        "inference_sha256": "e006a680fa7fdc63f7563a9614e54b9711e850442496fde26c510889b966dad0",
+        "parameters": 240355,
+        "selection": {
+          "documents_available": 2765,
+          "documents_selected": 2667,
+          "documents_unknown": 0,
+          "pairs_sha256": "17d8316c7873aaad83616a60c49f6a39b5feddb0c306715ccce7b7c6262f24c2",
+          "profile": "balanced-v2",
+          "selected_ids_sha256": "4bd4d74621210cb019c201daa4b198bdffd8f1b1538a792362f3d21d4533d491",
+          "sequences": 8192,
+          "sources": {
+            "internal-v1": {
+              "documents_available": 262,
+              "documents_representable": 262,
+              "documents_unknown": 0,
+              "unique_windows": 839,
+              "weight": 20,
+              "windows": 1638
+            },
+            "psf-wiki-python": {
+              "documents_available": 185,
+              "documents_representable": 185,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "python-vault-reference": {
+              "documents_available": 413,
+              "documents_representable": 413,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "python-vault-tutorials": {
+              "documents_available": 41,
+              "documents_representable": 41,
+              "documents_unknown": 0,
+              "unique_windows": 1517,
+              "weight": 20,
+              "windows": 1638
+            },
+            "python314-docs": {
+              "documents_available": 397,
+              "documents_representable": 397,
+              "documents_unknown": 0,
+              "unique_windows": 819,
+              "weight": 10,
+              "windows": 819
+            },
+            "simplewiki": {
+              "documents_available": 392,
+              "documents_representable": 392,
+              "documents_unknown": 0,
+              "unique_windows": 819,
+              "weight": 10,
+              "windows": 819
+            },
+            "tinystories-train": {
+              "documents_available": 512,
+              "documents_representable": 512,
+              "documents_unknown": 0,
+              "unique_windows": 1638,
+              "weight": 20,
+              "windows": 1638
+            },
+            "ud-train": {
+              "documents_available": 505,
+              "documents_representable": 505,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "wiktionary": {
+              "documents_available": 58,
+              "documents_representable": 58,
+              "documents_unknown": 0,
+              "unique_windows": 408,
+              "weight": 5,
+              "windows": 410
+            }
+          },
+          "tokenizer_fit_characters": 0,
+          "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079"
+        },
+        "status": "limited",
+        "step": 4228,
+        "steps_this_job": 2105,
+        "tokens": 126598,
+        "tokens_this_job": 63833,
+        "training_seconds_this_job": 873.7960482500202
+      },
+      "wall_seconds_this_invocation": 916.9299424999917
+    },
+    "hero-foundation": {
+      "before": {
+        "coding_heldout": {
+          "test": {
+            "coverage": 0.9947916666666666,
+            "documents_available": 192,
+            "documents_representable": 191,
+            "documents_selected": 16,
+            "documents_unknown": 1,
+            "loss": 6.890852824533325,
+            "perplexity": 983.2395906050485,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 456
+          },
+          "validation": {
+            "coverage": 0.9754098360655737,
+            "documents_available": 122,
+            "documents_representable": 119,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 7.007760352747717,
+            "perplexity": 1105.1765254680365,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 468
+          }
+        },
+        "general_heldout": {
+          "test": {
+            "coverage": 0.9893048128342246,
+            "documents_available": 561,
+            "documents_representable": 555,
+            "documents_selected": 16,
+            "documents_unknown": 6,
+            "loss": 6.919688798953047,
+            "perplexity": 1012.0050085072972,
+            "selected_sources": {
+              "internal-v1": 7,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 3
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 354
+          },
+          "validation": {
+            "coverage": 0.9962825278810409,
+            "documents_available": 1076,
+            "documents_representable": 1072,
+            "documents_selected": 16,
+            "documents_unknown": 4,
+            "loss": 6.959667524082038,
+            "perplexity": 1053.2833076861773,
+            "selected_sources": {
+              "internal-v1": 5,
+              "simplewiki": 3,
+              "tinystories-valid": 3,
+              "ud-dev": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 432
+          }
+        },
+        "heldout": {
+          "test": {
+            "coverage": 0.9907038512616202,
+            "documents_available": 753,
+            "documents_representable": 746,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 6.897049976858793,
+            "perplexity": 989.3517956920069,
+            "selected_sources": {
+              "internal-v1": 9,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "ud-test": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 398
+          },
+          "validation": {
+            "coverage": 0.9941569282136895,
+            "documents_available": 1198,
+            "documents_representable": 1191,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 6.993050163373039,
+            "perplexity": 1089.0381597078078,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "tinystories-valid": 1,
+              "ud-dev": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 450
+          }
+        }
+      },
+      "config_sha256": "b637263da06e8038b30b9a3a32bae05b559cfef28452e7674b4d7bd3ed4ce986",
+      "corpus_sha256": "e8be291ecabd23192f570f337d21feb7bded318f4f8cbf73086cd45e85463336",
+      "evaluation": {
+        "coding_heldout": {
+          "test": {
+            "coverage": 0.9947916666666666,
+            "documents_available": 192,
+            "documents_representable": 191,
+            "documents_selected": 16,
+            "documents_unknown": 1,
+            "loss": 2.4306917204271405,
+            "perplexity": 11.36674196887512,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 456
+          },
+          "validation": {
+            "coverage": 0.9754098360655737,
+            "documents_available": 122,
+            "documents_representable": 119,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 2.5719779537743066,
+            "perplexity": 13.091693613281475,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 2,
+              "python-vault-reference": 2,
+              "python-vault-tutorials": 2,
+              "python314-docs": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 468
+          }
+        },
+        "general_heldout": {
+          "test": {
+            "coverage": 0.9893048128342246,
+            "documents_available": 561,
+            "documents_representable": 555,
+            "documents_selected": 16,
+            "documents_unknown": 6,
+            "loss": 3.0038226671643224,
+            "perplexity": 20.162464185645074,
+            "selected_sources": {
+              "internal-v1": 7,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 3
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 354
+          },
+          "validation": {
+            "coverage": 0.9962825278810409,
+            "documents_available": 1076,
+            "documents_representable": 1072,
+            "documents_selected": 16,
+            "documents_unknown": 4,
+            "loss": 3.014538680476483,
+            "perplexity": 20.379687224057353,
+            "selected_sources": {
+              "internal-v1": 5,
+              "simplewiki": 3,
+              "tinystories-valid": 3,
+              "ud-dev": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 432
+          }
+        },
+        "heldout": {
+          "test": {
+            "coverage": 0.9907038512616202,
+            "documents_available": 753,
+            "documents_representable": 746,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.5569626817127915,
+            "perplexity": 12.896586729098898,
+            "selected_sources": {
+              "internal-v1": 9,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "ud-test": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 398
+          },
+          "validation": {
+            "coverage": 0.9941569282136895,
+            "documents_available": 1198,
+            "documents_representable": 1191,
+            "documents_selected": 16,
+            "documents_unknown": 7,
+            "loss": 2.5468622138273225,
+            "perplexity": 12.76698081107437,
+            "selected_sources": {
+              "internal-v1": 8,
+              "psf-wiki-python": 1,
+              "python-vault-reference": 1,
+              "python-vault-tutorials": 1,
+              "python314-docs": 1,
+              "simplewiki": 1,
+              "tinystories-valid": 1,
+              "ud-dev": 1,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 450
+          }
+        },
+        "syntax": {
+          "attempted": 1,
+          "failed": 0,
+          "nonempty": 1,
+          "parsed": 0
+        }
+      },
+      "job": {
+        "block_size": 32,
+        "checkpoint_interval": 250,
+        "evaluation_sequences": 16,
+        "learning_rate": 0.0015,
+        "max_seconds": 900,
+        "max_sequences": 8192,
+        "max_steps": 100000,
+        "model_id": "hero",
+        "profile": "balanced-v2",
+        "run_id": "hero-foundation-v2",
+        "seed": 7,
+        "shuffle": false
+      },
+      "model_id": "hero",
+      "parent_sha256": null,
+      "recipe_sha256": "ef2fc8007b41ef77c8c0ce1f49c7787c7e9a295c0007b4db02e9aea24cea4e0d",
+      "run_id": "hero-foundation-v2",
+      "schema": "hypnosis-training-result/1",
+      "status": "limited",
+      "training": {
+        "checkpoint_sha256": "e80e9c3359e273441f708fe4b97aea7492cf9ad3377bdd5ae52a1e68a37efa79",
+        "consumed_sources": {
+          "tokens": {
+            "internal-v1": 10777,
+            "psf-wiki-python": 3290,
+            "python-vault-reference": 3107,
+            "python-vault-tutorials": 13357,
+            "python314-docs": 6704,
+            "simplewiki": 6699,
+            "tinystories-train": 13278,
+            "ud-train": 2789,
+            "wiktionary": 2764
+          },
+          "windows": {
+            "internal-v1": 425,
+            "psf-wiki-python": 107,
+            "python-vault-reference": 107,
+            "python-vault-tutorials": 424,
+            "python314-docs": 212,
+            "simplewiki": 212,
+            "tinystories-train": 424,
+            "ud-train": 106,
+            "wiktionary": 106
+          }
+        },
+        "consumed_sources_scope": "cumulative native optimizer trajectory",
+        "continued_from_sha256": null,
+        "elapsed_seconds": 867.670327291009,
+        "history_limited": false,
+        "inference_sha256": "1a37024f404f5c0b4db7f94ac35ca1cb4920c0e6805c6a15f859be1828bfeb15",
+        "parameters": 240355,
+        "selection": {
+          "documents_available": 2765,
+          "documents_selected": 2667,
+          "documents_unknown": 0,
+          "pairs_sha256": "17d8316c7873aaad83616a60c49f6a39b5feddb0c306715ccce7b7c6262f24c2",
+          "profile": "balanced-v2",
+          "selected_ids_sha256": "4bd4d74621210cb019c201daa4b198bdffd8f1b1538a792362f3d21d4533d491",
+          "sequences": 8192,
+          "sources": {
+            "internal-v1": {
+              "documents_available": 262,
+              "documents_representable": 262,
+              "documents_unknown": 0,
+              "unique_windows": 839,
+              "weight": 20,
+              "windows": 1638
+            },
+            "psf-wiki-python": {
+              "documents_available": 185,
+              "documents_representable": 185,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "python-vault-reference": {
+              "documents_available": 413,
+              "documents_representable": 413,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "python-vault-tutorials": {
+              "documents_available": 41,
+              "documents_representable": 41,
+              "documents_unknown": 0,
+              "unique_windows": 1517,
+              "weight": 20,
+              "windows": 1638
+            },
+            "python314-docs": {
+              "documents_available": 397,
+              "documents_representable": 397,
+              "documents_unknown": 0,
+              "unique_windows": 819,
+              "weight": 10,
+              "windows": 819
+            },
+            "simplewiki": {
+              "documents_available": 392,
+              "documents_representable": 392,
+              "documents_unknown": 0,
+              "unique_windows": 819,
+              "weight": 10,
+              "windows": 819
+            },
+            "tinystories-train": {
+              "documents_available": 512,
+              "documents_representable": 512,
+              "documents_unknown": 0,
+              "unique_windows": 1638,
+              "weight": 20,
+              "windows": 1638
+            },
+            "ud-train": {
+              "documents_available": 505,
+              "documents_representable": 505,
+              "documents_unknown": 0,
+              "unique_windows": 410,
+              "weight": 5,
+              "windows": 410
+            },
+            "wiktionary": {
+              "documents_available": 58,
+              "documents_representable": 58,
+              "documents_unknown": 0,
+              "unique_windows": 408,
+              "weight": 5,
+              "windows": 410
+            }
+          },
+          "tokenizer_fit_characters": 524288,
+          "tokenizer_sha256": "2781a9159527d6a2e95ffa4bd51fe6e0637beb4fae8c2bb4c2a84527eddb1079"
+        },
+        "status": "limited",
+        "step": 2123,
+        "steps_this_job": 2123,
+        "tokens": 62765,
+        "tokens_this_job": 62765,
+        "training_seconds_this_job": 867.670327291009
+      },
+      "wall_seconds_this_invocation": 917.0624701250053
+    },
+    "pilot-shuffle": {
+      "before": {
+        "heldout": {
+          "test": {
+            "coverage": 0.9803921568627451,
+            "documents_available": 153,
+            "documents_representable": 150,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 5.2190806858132435,
+            "perplexity": 184.76424957521544,
+            "selected_sources": {
+              "internal-v1": 8,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 448
+          },
+          "validation": {
+            "coverage": 0.9893617021276596,
+            "documents_available": 282,
+            "documents_representable": 279,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 5.138479444120034,
+            "perplexity": 170.4563827111333,
+            "selected_sources": {
+              "internal-v1": 9,
+              "simplewiki": 2,
+              "tinystories-valid": 2,
+              "ud-dev": 2,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 451
+          }
+        }
+      },
+      "config_sha256": "8a73053a9c3504ef26e723d6b616c715cbda4209f156663b7c82e2ac40de7339",
+      "corpus_sha256": "02cc9e91105588d7bf28a0f80af8f15222aadc9ae09f85502e94d314658925f9",
+      "evaluation": {
+        "heldout": {
+          "test": {
+            "coverage": 0.9803921568627451,
+            "documents_available": 153,
+            "documents_representable": 150,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 2.603260032057165,
+            "perplexity": 13.507701875433048,
+            "selected_sources": {
+              "internal-v1": 8,
+              "simplewiki": 3,
+              "ud-test": 3,
+              "wiktionary": 2
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 448
+          },
+          "validation": {
+            "coverage": 0.9893617021276596,
+            "documents_available": 282,
+            "documents_representable": 279,
+            "documents_selected": 16,
+            "documents_unknown": 3,
+            "loss": 2.3203193678154994,
+            "perplexity": 10.178924607940976,
+            "selected_sources": {
+              "internal-v1": 9,
+              "simplewiki": 2,
+              "tinystories-valid": 2,
+              "ud-dev": 2,
+              "wiktionary": 1
+            },
+            "sequence_limit": 16,
+            "sequences": 16,
+            "status": "measured",
+            "tokens": 451
+          }
+        },
+        "syntax": {
+          "attempted": 1,
+          "failed": 0,
+          "nonempty": 1,
+          "parsed": 0
+        }
+      },
+      "job": {
+        "block_size": 32,
+        "checkpoint_interval": 100,
+        "evaluation_sequences": 16,
+        "learning_rate": 0.003,
+        "max_seconds": 478.8,
+        "max_sequences": 2048,
+        "max_steps": 1478,
+        "model_id": "hero",
+        "run_id": "hero-shuffle-session-v2",
+        "seed": 7,
+        "shuffle": true
+      },
+      "model_id": "hero",
+      "parent_sha256": null,
+      "recipe_sha256": "11523f5bf0b1f08fa6e14ca178ca5c3936ee2728682cd419572160b58fe92877",
+      "run_id": "hero-shuffle-session-v2",
+      "schema": "hypnosis-training-result/1",
+      "status": "completed",
+      "training": {
+        "checkpoint_sha256": "db2e8a334965883e8ca9365f2f0bae35e356f12fe7b9b2724e1c0c5399f39b88",
+        "elapsed_seconds": 278.12167887500254,
+        "inference_sha256": "c2873e61be775837ecb32ce0243f464d6e399ea0d570ff2049494451d7443ec4",
+        "parameters": 86900,
+        "selection": {
+          "documents_available": 490,
+          "documents_outside_window_pool": 252,
+          "documents_selected": 195,
+          "documents_unknown": 43,
+          "pairs_sha256": "64dc59fd7d24ef796bdbdf56cc8d8b9f4f8dbf0d2355a7bbc507951e389c92c1",
+          "sequences": 2048,
+          "sources": {},
+          "tokenizer_sha256": "64ca830ea9da36788cce54b5dbb3051076c6b5b4ef011e78f27574a5d1e9831c"
+        },
+        "status": "completed",
+        "step": 1478,
+        "tokens": 45233
+      },
+      "wall_seconds_this_invocation": 284.98777708399575
+    }
+  },
+  "runtime": {
+    "code_commit": "e89bb00cf5b5dbf8185250fe5d598c3128457c50",
+    "controller_sha256": "f1a68b0daaa1109223ddd708269370264c36fc2d59c7044760a06b0d966d59b0",
+    "module_is_installed": true,
+    "python": "3.14.7",
+    "sources": {
+      "backpack-store": "77440f85a290a756e26c7180ccb2d092812f13b4",
+      "carets": "991c3bfc67c4c6aaa49fecb62c819618605f1d03",
+      "engl": "0d1de7f36a2cb4bc0b2eef28195c7046beda46ab",
+      "expose-interface": "8c71caefe67217bb6df87e280261746a3055fc86",
+      "func-seq": "bfb4c1d5bccc73f842d72ddb7809a11973acb9e4",
+      "parse-md": "54ff935e4ef9218a5c6227eb4149b62a52f89ec1",
+      "thoughtform": "6c28d496a4f2bcc613dc1a1e1e21bf2095833c78",
+      "thoughtformula": "5ce72f850772c2467f0a0909dfd5c81874065684"
+    },
+    "versions": {
+      "backpack-store": "0.2.0",
+      "carets": "0.1.0",
+      "engl": "0.1.0",
+      "expose-interface": "0.1.0",
+      "func-seq": "0.1.0",
+      "hypnosis": "0.1.0",
+      "parse-md": "0.1.0",
+      "thoughtform": "0.1.0",
+      "thoughtformula": "0.3.0"
+    },
+    "wheel_sha256": "fce79c11281d6a35e1c30a3f2843e6169560d81d00d8175fd4eb6b211794f26c"
+  },
+  "scheduled_stop_pst": "2026-11-21 07:29:45 PM PST",
+  "scheduled_stop_utc": "2026-11-22T03:29:45.996013+00:00",
+  "schema": "hero-session-evidence/2",
+  "source_review": "https://github.com/wispsy/hypnosis/issues/27",
+  "started_utc": "2026-11-22T02:29:45.996013+00:00",
+  "status": "completed",
+  "training_job_totals": {
+    "scope": "reported session jobs only; excludes probes and prior preserved jobs",
+    "seconds": 3078.4532827490475,
+    "steps": 8180,
+    "tokens": 247964
+  }
+}
