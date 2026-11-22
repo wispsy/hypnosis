@@ -14,7 +14,7 @@ def write(path,value):
     path.write_text(json.dumps(value,sort_keys=True,indent=2,allow_nan=False)+'\n')
 
 
-def run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False):
+def _run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False,resume=False):
     if type(budget) is not int or not 600<=budget<=3600: raise ValueError('Select a 10–60 minute session ceiling')
     from hypnosis.data import load_corpus
     from hypnosis.checkpoints import index_run,CheckpointCollection
@@ -22,13 +22,26 @@ def run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False
     pilot_corpus=Path(pilot_corpus).resolve();previous_pilot=Path(previous_pilot).resolve()
     current,_documents=load_corpus(corpus);load_corpus(pilot_corpus)
     original=json.loads((previous_pilot/'hero/result.json').read_text())
-    destination.mkdir(parents=False,exist_ok=False)
+    prior=None
+    if destination.exists() and resume:
+        prior=json.loads((destination/'session.json').read_text())
+        if prior['corpus_sha256']!=current['sha256'] or prior['budget_seconds']!=budget or prior['fixture_smoke']!=smoke:
+            raise ValueError('Session resume identity differs')
+        if prior['status']=='completed':
+            print(json.dumps({'status':'completed','reopened':True}),flush=True)
+            return prior
+    else: destination.mkdir(parents=False,exist_ok=False)
     collection_root=destination.parent;database=collection_root/'checkpoints.sqlite'
     for name in ('hero','hero-coding'):
         index_run(previous_pilot/name,database,collection_root)
     started=time.monotonic();deadline=started+budget;now=datetime.now(timezone.utc)
     schedule={'started_utc':now.isoformat(),'budget_seconds':budget,
         'scheduled_stop_pst':(now+timedelta(seconds=budget)).astimezone(ZoneInfo('America/Los_Angeles')).strftime('%Y-%m-%d %I:%M:%S %p %Z')}
+    if prior is not None:
+        elapsed=(now-datetime.fromisoformat(prior['started_utc'])).total_seconds()
+        started-=elapsed;deadline=started+budget
+        schedule={key:prior[key] for key in ('started_utc','budget_seconds','scheduled_stop_pst')}
+        if deadline<=time.monotonic(): raise TimeoutError('Original session deadline has passed')
     summary={'schema':'hero-session/2',**schedule,'fixture_smoke':smoke,'corpus_sha256':current['sha256'],
         'corpus':{k:current[k] for k in ('documents','splits','bytes')},'runs':{},'status':'running',
         'software':{'python':sys.version.split()[0],'packages':{name:metadata.version(name) for name in
@@ -42,6 +55,8 @@ def run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False
         stdout=destination/(name+'.stdout.json');stderr=destination/(name+'.progress.jsonl')
         with stdout.open('w') as output,stderr.open('w') as errors:
             process=subprocess.run([sys.executable,'-u',*args],stdout=output,stderr=errors,timeout=remaining)
+        write(destination/(name+'.exit.json'),{'returncode':process.returncode,
+              'stdout_bytes':stdout.stat().st_size,'stderr_bytes':stderr.stat().st_size})
         if stdout.stat().st_size>1024*1024: raise ValueError('Child result exceeds its byte ceiling')
         try: value=json.loads(stdout.read_text())
         except json.JSONDecodeError:
@@ -54,7 +69,13 @@ def run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False
             raise RuntimeError(name+' failed; local diagnostics retained')
         return value
     def train(name,config,selected_corpus,*,parent=None,continued=None):
-        settings=destination/(name+'.config.json');write(settings,config)
+        settings=destination/(name+'.config.json')
+        if settings.exists():
+            original_settings=json.loads(settings.read_text())
+            if any(original_settings.get(key)!=value for key,value in config.items() if key!='max_seconds'):
+                raise ValueError('Existing phase settings differ')
+            config=original_settings
+        else: write(settings,config)
         args=['-m','hypnosis','train',str(selected_corpus),str(destination/name),str(settings)]
         if parent is not None: args+=['--parent-artifact',str(parent)]
         if continued is not None: args+=['--continue-artifact',str(continued)]
@@ -71,7 +92,11 @@ def run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False
 import json,sys
 print(json.dumps({'status':'completed',**benchmark_job(sys.argv[1],sys.argv[2],steps=3,profile='balanced-v2')}))
 '''
-        summary['probe']=execute('probe',['-c',probe_code,str(corpus),str(destination/'probe')])
+        cache=destination/'probe.result.json'
+        if cache.exists(): summary['probe']=json.loads(cache.read_text())
+        else:
+            summary['probe']=execute('probe',['-c',probe_code,str(corpus),str(destination/'probe')])
+            write(cache,summary['probe'])
         baseline={**original['job'],'run_id':'hero-shuffle-session-v2','shuffle':True,'max_steps':original['training']['step'],
                   'max_seconds':min(480,budget*0.133)}
         shuffled=train('pilot-shuffle',baseline,pilot_corpus)
@@ -92,7 +117,7 @@ print(json.dumps({'status':'completed',**benchmark_job(sys.argv[1],sys.argv[2],s
         train('hero-continued',{**config,'run_id':'hero-continued-v2'},corpus,
               continued=destination/'hero-foundation/artifact.json')
         train('hero-coding',{**config,'run_id':'hero-coding-v2','model_id':'hero-coding',
-            'learning_rate':0.00075,'max_seconds':30 if smoke else min(1080,budget*0.30)},corpus,
+            'learning_rate':0.00075,'max_seconds':30 if smoke else max(1,min(1080,budget*0.30,deadline-time.monotonic()-40))},corpus,
             parent=destination/'hero-continued/artifact.json')
         summary['status']='completed'
     except (subprocess.TimeoutExpired,TimeoutError):
@@ -117,12 +142,21 @@ print(json.dumps({'status':'completed',**benchmark_job(sys.argv[1],sys.argv[2],s
     return summary
 
 
+def run(corpus,destination,pilot_corpus,previous_pilot,*,budget=3600,smoke=False,resume=False):
+    from func_seq import CheckpointStore
+    path=Path(destination).resolve()
+    # Reuse the workflow library's ownership contract, including stale-lock refusal.
+    with CheckpointStore(path.with_name(path.name+'.session')).owned():
+        return _run(corpus,destination,pilot_corpus,previous_pilot,budget=budget,smoke=smoke,resume=resume)
+
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('corpus');parser.add_argument('destination')
     parser.add_argument('--pilot-corpus',required=True);parser.add_argument('--previous-pilot',required=True)
     parser.add_argument('--budget',type=int,default=3600)
     parser.add_argument('--smoke',action='store_true',help='Exercise the same lifecycle with two-step fixture jobs.')
+    parser.add_argument('--resume',action='store_true',help='Keep the original deadline; never retry uncertain training effects automatically.')
     options=parser.parse_args()
-    result=run(options.corpus,options.destination,options.pilot_corpus,options.previous_pilot,budget=options.budget,smoke=options.smoke)
+    result=run(options.corpus,options.destination,options.pilot_corpus,options.previous_pilot,budget=options.budget,smoke=options.smoke,resume=options.resume)
     if result['status']!='completed': raise SystemExit(1)

@@ -33,3 +33,10 @@ class SessionTests(unittest.TestCase):
             self.assertEqual(result['runs']['hero-continued']['training']['step'],4)
             self.assertEqual(result['runs']['hero-coding']['training']['step'],2)
             self.assertEqual(len(result['collection_page']['checkpoints']),12)
+            before=(root/'session/hero-continued/model.tft').read_bytes()
+            reopened=subprocess.run([sys.executable,str(script),str(corpus),str(root/'session'),
+                '--pilot-corpus',str(corpus),'--previous-pilot',str(previous),'--budget','600','--smoke','--resume'],
+                capture_output=True,text=True,timeout=15)
+            self.assertEqual(reopened.returncode,0,reopened.stderr)
+            self.assertTrue(json.loads(reopened.stdout)['reopened'])
+            self.assertEqual(before,(root/'session/hero-continued/model.tft').read_bytes())

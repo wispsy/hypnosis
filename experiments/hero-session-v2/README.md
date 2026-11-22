@@ -12,7 +12,7 @@ The selected combined experiment ceiling is one hour:
    corpus/window/tokenizer/recipe/initial-evaluation identities match v1.
 3. New balanced Hero foundation for fifteen minutes.
 4. Exact Hero continuation for another fifteen minutes, preserving Adam and order.
-5. Hero Coding specialization for eighteen minutes with a lower learning rate.
+5. Hero Coding specialization for up to eighteen minutes with a lower learning rate.
 
 The remaining time covers checkpoint/evaluation/collection work. Every child has
 the remaining hard combined deadline. Native jobs also stop at optimizer boundaries.
@@ -23,6 +23,14 @@ branch changes cannot alter a running session:
 python experiments/hero-session-v2/run.py .corpora/selected .runs/hero-session-v2 \
   --pilot-corpus .corpora/hero-pilot-v1 --previous-pilot .runs/hero-pilot-20261120
 ```
+
+An interrupted controller can use `--resume` after inspecting the saved phase and
+native workflow state. It retains the original session deadline and phase settings;
+it does not grant more runtime. A completed session reopens without training.
+Controller ownership and uncertain native effects follow func_seq's lock/recovery
+contract. An active or stale lock must be resolved by inspecting its owner before
+recovery; there is no automatic replay of uncertain training effects. Exit receipts
+retain child return codes and output sizes even when result delivery fails.
 
 Periodic immutable snapshots and final sidecars enter `.runs/checkpoints.sqlite`.
 Model/profile/tokenizer/recipe/corpus/parent/continuation identity stays explicit.
