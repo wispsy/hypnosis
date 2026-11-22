@@ -152,3 +152,13 @@ source spans and code blocks; documentation members stream from the text archive
 without extraction. References and derivation remain attached, and related page
 chunks share a held-out group. Alternate documentation formats are not duplicate
 training samples. Downloaded examples are data and are never executed.
+
+The `balanced-v2` job profile selects the named larger recipes and interleaves
+weighted source/document windows. Every selected source receives a quota; small
+original sets may be deliberately oversampled, with unique/repeated counts
+recorded. Tokenizer merges use a bounded balanced training sample, and its
+alphabet includes all selected training characters. Hero Coding inherits that
+frozen vocabulary. Actual consumed source windows/tokens and separate coding/
+general held-out measurements are reported. `pilot-v1` remains the default and
+retains its original config, tokenizer and window identities for old jobs and
+matched comparisons. Losses across different tokenizers are not directly comparable.

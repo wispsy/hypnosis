@@ -75,6 +75,17 @@ class TrainingJobTests(unittest.TestCase):
         for settings in ({'max_seconds':901},{'max_steps':True},{'shuffle':1}):
             with self.assertRaises((ValueError,TypeError)): JobConfig('fixture',**settings)
 
+    def test_balanced_job_records_actual_source_consumption_and_domain_metrics(self):
+        from hypnosis.training import JobConfig,run_job
+        with TemporaryDirectory() as directory:
+            root=Path(directory);corpus,recipe=self.fixture(root)
+            result=run_job(corpus,root/'balanced',JobConfig('balanced-fixture',profile='balanced-v2',
+                max_steps=3,max_sequences=20,block_size=4,evaluation_sequences=1),recipe=recipe)
+            self.assertEqual(result['training']['consumed_sources']['windows'],{'internal-v1':3})
+            self.assertEqual(sum(result['training']['consumed_sources']['tokens'].values()),result['training']['tokens'])
+            self.assertIn('coding_heldout',result['evaluation'])
+            self.assertIn('general_heldout',result['evaluation'])
+
     def test_real_training_progress_through_carets(self):
         from carets import KeyMsg
         from carets.testing import TestProgram

@@ -210,3 +210,9 @@ are not directly compared numerically with v1 across different tokenizers.
 Tiny short-run models remain experimental; no factual, functional coding or
 autonomous training-agent claim follows from loss or syntax. No Ollama/external
 teacher, paid provider, package release or model-weight publication is selected.
+
+HYP-MIX-01 implements balanced-v2 source quotas, weighted document/window
+interleaving, complete selected-training alphabet coverage and actual consumed
+source audits. Separate coding/general held-out metrics make specialization
+regressions visible. Legacy job settings omit the new profile field to retain
+existing identity; the original completed pilot reopens without replay.
