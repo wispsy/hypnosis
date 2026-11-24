@@ -214,3 +214,17 @@ run directory; cumulative and per-job counters are both recorded. Specialization
 uses `--parent-artifact` instead and resets Adam. These operations cannot be
 combined. Every history/final context is passive data; no source code is loaded
 from it. Index refresh is idempotent and does not train or mutate checkpoint bytes.
+
+
+### MediaWiki excerpt profile
+
+The optional `data` and `training` profiles use `parse-mw==0.1.0` for typed
+MediaWiki syntax. Hypnosis retains citation policy: exact original character
+spans, named/grouped reuse, ambiguous definitions and bounded evidence URLs.
+A small reference-span adapter handles self-closing and grouped references
+before parsing; no template expansion, URL retrieval or external parser runs.
+Comments and unexpanded templates are omitted from plain excerpts, link labels
+and literal regions remain text. Up to 128 citation records and 4,096 scanned
+references are admitted per article; input is capped at 4 Mi characters and the
+syntax tree at 100,000 nodes/64 levels. Nested/unclosed references or conflicting
+name/group attributes refuse rather than inventing citation provenance.
