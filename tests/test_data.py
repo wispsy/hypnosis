@@ -55,7 +55,7 @@ class DataTests(unittest.TestCase):
             index.write_bytes(bz2.compress(f'{start}:1:Wrong\n{next_start}:3:Second\n'.encode()))
             with self.assertRaises(ValueError): list(pages(dump,index))
 
-    @unittest.skipUnless(importlib.util.find_spec('mwparserfromhell'),'optional Wikipedia parser is not installed')
+    @unittest.skipUnless(importlib.util.find_spec('parse_mw'),'optional Wikipedia parser is not installed')
     def test_citation_markers_named_reuse_and_provenance_spans_survive(self):
         from hypnosis.data.wiki import clean_wikitext
         raw="'''A star''' is bright.<ref name='a'>https://example.org/evidence</ref> Again.<ref name='a'/>"
@@ -74,7 +74,7 @@ class DataTests(unittest.TestCase):
             with self.assertRaises(ValueError): prepare_corpus([Source('tinystories-train',str(path))],root/'out',limits=DataLimits(max_output_bytes=10))
             self.assertFalse((root/'out').exists())
 
-    @unittest.skipUnless(importlib.util.find_spec('mwparserfromhell'),'optional Wikipedia parser is not installed')
+    @unittest.skipUnless(importlib.util.find_spec('parse_mw'),'optional Wikipedia parser is not installed')
     def test_conflicting_named_references_and_groups_remain_distinct(self):
         from hypnosis.data.wiki import clean_wikitext
         raw=("A<ref name='same'>https://example.org/a</ref>"
@@ -104,3 +104,45 @@ class DataTests(unittest.TestCase):
             receipt['sources']['python3-vault']=receipt['sources'].pop('tinystories-train')
             manifest.write_text(json.dumps(receipt))
             with self.assertRaises(ValueError): load_corpus(root/'out')
+
+
+@unittest.skipUnless(importlib.util.find_spec('parse_mw'),'optional Parse MW profile is not installed')
+class WikitextTests(unittest.TestCase):
+    def test_published_parser_preserves_display_text_and_drops_templates(self):
+        import parse_mw
+        from unittest.mock import patch
+        from hypnosis.data.wiki import clean_wikitext
+        raw="'''Bold''' &amp; [[Target|label]] {{Unexpanded|secret}}<ref>https://example.org/a</ref>"
+        with patch.object(parse_mw,'parse_fragment',wraps=parse_mw.parse_fragment) as parsed:
+            text,refs,_=clean_wikitext(raw)
+        self.assertEqual(parsed.call_count,1)
+        self.assertIn('Bold & label',text);self.assertNotIn('secret',text)
+        self.assertEqual(refs[0]['urls'],['https://example.org/a'])
+
+    def test_literal_regions_comments_unicode_and_exact_spans(self):
+        from hypnosis.data.wiki import clean_wikitext
+        raw=("α\r\n<!-- <ref name='a'>ignored</ref> -->"
+             "<nowiki><ref name='a'>literal</ref></nowiki>"
+             "<REF NAME = a GROUP = note>https://example.org/a</REF>"
+             "Again<REF NAME=a GROUP=note />")
+        text,refs,metadata=clean_wikitext(raw)
+        self.assertEqual(metadata['reference_count'],2)
+        self.assertEqual(refs[0]['group'],'note');self.assertTrue(refs[1]['resolved'])
+        self.assertEqual(refs[1]['urls'],['https://example.org/a'])
+        self.assertEqual(raw[refs[0]['raw_start']:refs[0]['raw_end']],'<REF NAME = a GROUP = note>https://example.org/a</REF>')
+        self.assertEqual(raw[refs[1]['raw_start']:refs[1]['raw_end']],'<REF NAME=a GROUP=note />')
+        self.assertIn("<ref name='a'>literal</ref>",text);self.assertNotIn('ignored',text)
+
+    def test_reference_and_excerpt_budgets_are_explicit(self):
+        from hypnosis.data.wiki import clean_wikitext
+        text,refs,metadata=clean_wikitext('word'+''.join('<ref>https://example.org/'+str(n)+'</ref>' for n in range(130)),max_characters=10)
+        self.assertEqual(len(refs),128);self.assertEqual(metadata['reference_count'],130)
+        self.assertTrue(metadata['references_truncated']);self.assertTrue(metadata['text_truncated'])
+        self.assertLessEqual(len(text),10)
+        for raw,kwargs in (('a',{'max_characters':0}),('a',{'max_characters':True}),('x'*(4*1024*1024+1),{}),('<ref/>'*4097,{})):
+            with self.assertRaises(ValueError):clean_wikitext(raw,**kwargs)
+
+    def test_unclosed_nested_and_conflicting_attributes_refuse(self):
+        from hypnosis.data.wiki import clean_wikitext
+        for raw in ('<ref>unclosed','<ref>outer<ref/>inner</ref>',"<ref name='a' name='b'/>",'<ref name="'+('x'*257)+'"/>'):
+            with self.subTest(raw=raw[:60]),self.assertRaises(ValueError):clean_wikitext(raw)

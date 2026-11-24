@@ -2,7 +2,6 @@
 import bz2
 import hashlib
 from pathlib import Path
-import re
 import xml.etree.ElementTree as ET
 
 
@@ -72,36 +71,5 @@ def pages(dump,index,*,max_pages=32,max_blocks=8,max_expanded_bytes=16*1024*1024
 
 
 def clean_wikitext(text,*,max_characters=4096):
-    import mwparserfromhell
-    if type(text) is not str or len(text)>4*1024*1024: raise ValueError('Wikitext exceeds the article limit')
-    code=mwparserfromhell.parse(text)
-    references=[];cursor=0;definitions={}
-    tags=code.filter_tags(matches=lambda value:str(value.tag).strip().lower()=='ref')
-    for number,tag in enumerate(tags,1):
-        if number>128: break
-        raw=str(tag);start=text.find(raw,cursor)
-        if start<0: raise ValueError('Reference span is not traceable')
-        cursor=start+len(raw)
-        name=str(tag.get('name').value).strip('"\' ') if tag.has('name') else ''
-        group=str(tag.get('group').value).strip('"\' ') if tag.has('group') else ''
-        if len(name)>256 or len(group)>256: raise ValueError('Reference name/group exceeds its bound')
-        body=str(tag.contents) if tag.contents is not None else ''
-        key=(group,name) if name else (None,number)
-        if body: definitions.setdefault(key,set()).add(body)
-        references.append({'id':f'cite-{number}','name':name,'group':group,'raw_start':start,'raw_end':cursor,
-                           'body':body[:4096],'body_truncated':len(body)>4096,'key':key})
-        code.replace(tag,f' [cite-{number}] ')
-    for reference in references:
-        candidates=definitions.get(reference['key'],set())
-        reference['ambiguous_name']=bool(reference['name'] and len(candidates)>1)
-        body=reference['body']
-        if not body and len(candidates)==1:
-            full=next(iter(candidates));body=full[:4096]
-            reference['body_truncated']=len(full)>4096
-        reference['resolved']=bool(body);reference['body']=body
-        reference['urls']=re.findall(r'https?://[^\s<>|}\]]+',body)[:16]
-        reference.pop('key')
-    plain=code.strip_code(normalize=True,collapse=True)
-    plain='\n'.join(line.strip() for line in plain.splitlines() if line.strip())
-    truncated=len(plain)>max_characters
-    return plain[:max_characters],references,{'text_truncated':truncated,'references_truncated':len(tags)>128,'reference_count':len(tags)}
+    from .wikitext import clean_wikitext as clean
+    return clean(text,max_characters=max_characters)
