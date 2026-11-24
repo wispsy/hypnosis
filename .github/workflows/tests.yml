@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        profile: ['', models, data, records, workflow, training, tools, context, application]
+        profile: ['', models, data, records, workflow, training, tools, context, application, 'application,models']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
