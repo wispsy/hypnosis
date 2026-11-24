@@ -7,7 +7,7 @@ import sys
 from tempfile import TemporaryDirectory
 import unittest
 
-AVAILABLE=all(importlib.util.find_spec(name) for name in ('thoughtformula','thoughtform','backpack_store','func_seq'))
+AVAILABLE=all(importlib.util.find_spec(name) for name in ('thoughtformula','thoughtform','backpack_store','func_seq','engl'))
 
 
 @unittest.skipUnless(AVAILABLE,'optional training profile is not installed')

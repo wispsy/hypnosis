@@ -1,15 +1,17 @@
 [project]
 name = "hypnosis"
-version = "0.1.0"
+version = "0.1.0a1"
 description = "Bounded harness execution, orchestration and a Carets application."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.md"]
 authors = [
     { name = "ellainng", email = "299958882+ellainng@users.noreply.github.com" }
 ]
 requires-python = ">=3.14"
 dependencies = [
-    "carets @ git+https://github.com/wispsy/carets.git@0bec123a70dde1b762dd89622dc1954c8bacb794",
-    "expose-interface @ git+https://github.com/wispsy/expose_interface.git@8c71caefe67217bb6df87e280261746a3055fc86",
+    "carets==0.2.0",
+    "expose-interface==0.1.0",
 ]
 
 [project.scripts]
@@ -21,32 +23,32 @@ build-backend = "uv_build"
 
 [project.optional-dependencies]
 application = [
-    "hidden-moves @ git+https://github.com/wispsy/hidden_moves.git@fe5d822c82d5aa6e503fd3981161f97da113cdf0",
-    "hidden-moves-workspace @ git+https://github.com/wispsy/hidden_moves.git@fe5d822c82d5aa6e503fd3981161f97da113cdf0#subdirectory=packages/hidden-moves-workspace",
-    "parse-md @ git+https://github.com/wispsy/parse_md.git@54ff935e4ef9218a5c6227eb4149b62a52f89ec1",
-    "backpack-store @ git+https://github.com/wispsy/backpack.git@77440f85a290a756e26c7180ccb2d092812f13b4",
-    "func-seq @ git+https://github.com/wispsy/func_seq.git@bfb4c1d5bccc73f842d72ddb7809a11973acb9e4",
-    "headless-spreadsheets @ git+https://github.com/wispsy/headless_spreadsheets.git@811f1e1b297cacb887164bcb78ba6be39e37c90d",
+    "hidden-moves==0.1.1",
+    "hidden-moves-workspace==0.1.0a2",
+    "parse-md==0.1.0",
+    "backpack-store==0.2.0",
+    "func-seq==0.1.0",
+    "headless-spreadsheets==0.1.1",
 ]
 context = [
-    "hidden-moves-workspace @ git+https://github.com/wispsy/hidden_moves.git@fe5d822c82d5aa6e503fd3981161f97da113cdf0#subdirectory=packages/hidden-moves-workspace",
-    "parse-md @ git+https://github.com/wispsy/parse_md.git@54ff935e4ef9218a5c6227eb4149b62a52f89ec1",
+    "hidden-moves-workspace==0.1.0a2",
+    "parse-md==0.1.0",
 ]
-tools = ["hidden-moves @ git+https://github.com/wispsy/hidden_moves.git@fe5d822c82d5aa6e503fd3981161f97da113cdf0"]
-workflow = ["func-seq @ git+https://github.com/wispsy/func_seq.git@bfb4c1d5bccc73f842d72ddb7809a11973acb9e4"]
-records = ["backpack-store @ git+https://github.com/wispsy/backpack.git@77440f85a290a756e26c7180ccb2d092812f13b4"]
+tools = ["hidden-moves==0.1.1"]
+workflow = ["func-seq==0.1.0"]
+records = ["backpack-store==0.2.0"]
 data = [
-    "parse-md @ git+https://github.com/wispsy/parse_md.git@54ff935e4ef9218a5c6227eb4149b62a52f89ec1",
+    "parse-md==0.1.0",
     "parse-mw==0.1.0",
-    "engl @ git+https://github.com/wispsy/engl.git@0d1de7f36a2cb4bc0b2eef28195c7046beda46ab",
+    "engl==0.1.0a1",
 ]
-models = ["thoughtform[thoughtformula] @ git+https://github.com/wispsy/thoughtform.git@6c28d496a4f2bcc613dc1a1e1e21bf2095833c78"]
+models = ["thoughtform[thoughtformula]==0.1.0a1"]
 training = [
-    "parse-md @ git+https://github.com/wispsy/parse_md.git@54ff935e4ef9218a5c6227eb4149b62a52f89ec1",
-    "thoughtform[thoughtformula] @ git+https://github.com/wispsy/thoughtform.git@6c28d496a4f2bcc613dc1a1e1e21bf2095833c78",
-    "backpack-store @ git+https://github.com/wispsy/backpack.git@77440f85a290a756e26c7180ccb2d092812f13b4",
-    "func-seq @ git+https://github.com/wispsy/func_seq.git@bfb4c1d5bccc73f842d72ddb7809a11973acb9e4",
-    "engl @ git+https://github.com/wispsy/engl.git@0d1de7f36a2cb4bc0b2eef28195c7046beda46ab",
+    "parse-md==0.1.0",
+    "thoughtform[thoughtformula]==0.1.0a1",
+    "backpack-store==0.2.0",
+    "func-seq==0.1.0",
+    "engl==0.1.0a1",
     "parse-mw==0.1.0",
 ]
 

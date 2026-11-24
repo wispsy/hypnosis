@@ -1,5 +1,10 @@
 # Hypnosis
 
+Initial PyPI preview: **0.1.0a1**. Data and training use published
+`parse-mw==0.1.0`; optional profiles select exact published package versions.
+No weights or datasets are distributed. [Wispsy Releases](https://github.com/orgs/wispsy/projects/31)
+tracks verified publication separately from current main development.
+
 Bounded harness execution, orchestration and a Carets terminal application.
 Python 3.14+. Source development is tracked in
 [Cohesion Block B](https://github.com/orgs/wispsy/projects/28).
